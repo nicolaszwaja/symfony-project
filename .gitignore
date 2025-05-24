@@ -5,3 +5,8 @@
 /my_project/var/
 /my_project/vendor/
 
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###

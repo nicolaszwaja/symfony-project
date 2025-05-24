@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logowanie administratora{% endblock %}
+
+{% block body %}
+<h1>Logowanie administratora</h1>
+
+<form action="{{ path('admin_login') }}" method="post">
+    <label for="username">Nazwa użytkownika:</label>
+    <input type="text" id="username" name="_username" required>
+
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="_password" required>
+
+    <button type="submit">Zaloguj się</button>
+</form>
+{% endblock %}

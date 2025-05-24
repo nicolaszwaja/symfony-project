@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posty w kategorii: {{ category.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Posty w kategorii: <strong>{{ category.name }}</strong></h1>
+
+    {% if posts is empty %}
+        <div class="alert alert-info">Brak postów w tej kategorii.</div>
+    {% else %}
+        <div class="list-group">
+            {% for post in posts %}
+                <a href="{{ path('post_show', {'id': post.id}) }}" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small>{{ post.createdAt|date('d.m.Y H:i') }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ path('category_index') }}" class="btn btn-secondary mt-4">← Powrót do listy kategorii</a>
+</div>
+{% endblock %}

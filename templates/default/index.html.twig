@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">Witamy na stronie głównej!</h1>
+        <p class="lead mt-3">To jest startowy szablon Twojego projektu.</p>
+        <a href="{{ path('posts_list') }}" class="btn btn-primary mt-4">Zobacz wszystkie posty</a>
+    </div>
+</div>
+{% endblock %}
