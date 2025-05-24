@@ -1,0 +1,18 @@
+image: gitpod/workspace-full
+
+tasks:
+  - name: Setup Symfony
+    init: |
+      sudo apt update && sudo apt install -y unzip zip php-cli php-mbstring php-xml php-intl php-curl php-zip php-mysql php-sqlite3
+      curl -sS https://get.symfony.com/cli/installer | bash
+      mv ~/.symfony*/bin/symfony /usr/local/bin/symfony
+      symfony new my_project --webapp
+      cd my_project && composer install
+    command: |
+      cd my_project
+      symfony serve -d
+      echo "Symfony app running at: https://$(gp url 8000)"
+
+ports:
+  - port: 8000
+    onOpen: open-preview
