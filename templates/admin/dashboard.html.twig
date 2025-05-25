@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel Administratora{% endblock %}
+
+{% block body %}
+<h1>Panel Administratora</h1>
+
+<div class="accordion" id="adminAccordion">
+
+  <!-- Posty -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingPosts">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePosts" aria-expanded="true" aria-controls="collapsePosts">
+        Posty
+      </button>
+    </h2>
+    <div id="collapsePosts" class="accordion-collapse collapse show" aria-labelledby="headingPosts" data-bs-parent="#adminAccordion">
+      <div class="accordion-body">
+        <a href="{{ path('post_new') }}" class="btn btn-success mb-3">Dodaj nowy post</a>
+        <ul class="list-group">
+          {% for post in posts %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ post.title }}
+              <div>
+                <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-primary btn-sm">Edytuj</a>
+                <form method="post" action="{{ path('post_delete', {'id': post.id}) }}" style="display:inline-block" onsubmit="return confirm('Na pewno usunąć post?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                  <button class="btn btn-danger btn-sm">Usuń</button>
+                </form>
+              </div>
+            </li>
+          {% else %}
+            <li class="list-group-item">Brak postów.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kategorie -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingCategories">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+        Kategorie
+      </button>
+    </h2>
+    <div id="collapseCategories" class="accordion-collapse collapse" aria-labelledby="headingCategories" data-bs-parent="#adminAccordion">
+      <div class="accordion-body">
+        <a href="{{ path('categories_new') }}" class="btn btn-success mb-3">Dodaj nową kategorię</a>
+        <ul class="list-group">
+          {% for category in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ category.name }}
+              <div>
+                <a href="{{ path('categories_edit', {'id': category.id}) }}" class="btn btn-primary btn-sm">Edytuj</a>
+                <form method="post" action="{{ path('categories_delete', {'id': category.id}) }}" style="display:inline-block" onsubmit="return confirm('Na pewno usunąć kategorię?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                  <button class="btn btn-danger btn-sm">Usuń</button>
+                </form>
+              </div>
+            </li>
+          {% else %}
+            <li class="list-group-item">Brak kategorii.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Komentarze -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingComments">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseComments">
+        Komentarze
+      </button>
+    </h2>
+    <div id="collapseComments" class="accordion-collapse collapse" aria-labelledby="headingComments" data-bs-parent="#adminAccordion">
+      <div class="accordion-body">
+        <ul class="list-group">
+        {% for comment in comments %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ comment.nickname }}</strong> w poście: <em>{{ comment.post.title }}</em> — 
+              {{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}
+            </div>
+            <form method="post" action="{{ path('comment_delete', {'id': comment.id}) }}" style="display:inline-block" onsubmit="return confirm('Na pewno usunąć komentarz?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+              <button class="btn btn-danger btn-sm">Usuń</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="list-group-item">Brak komentarzy.</li>
+        {% endfor %}
+      </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

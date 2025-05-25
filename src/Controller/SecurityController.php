@@ -1,24 +1,32 @@
 <?php
-
-// src/Controller/SecurityController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/admin/login', name: 'admin_login')]
-    public function login(): Response
+    #[Route(path: '/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // tutaj będzie formularz logowania administratora
-        return $this->render('security/login.html.twig');
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
     }
 
-    #[Route('/admin/logout', name: 'admin_logout')]
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Symfony obsłuży wylogowanie, ta metoda może zostać pusta
+        // Controller can be blank: it will be intercepted by the logout key on your firewall.
+        throw new \Exception('This should never be reached!');
     }
 }

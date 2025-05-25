@@ -1,17 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Logowanie administratora{% endblock %}
+{% block title %}Logowanie Admina{% endblock %}
 
 {% block body %}
-<h1>Logowanie administratora</h1>
+    <h1>Zaloguj się</h1>
 
-<form action="{{ path('admin_login') }}" method="post">
-    <label for="username">Nazwa użytkownika:</label>
-    <input type="text" id="username" name="_username" required>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-    <label for="password">Hasło:</label>
-    <input type="password" id="password" name="_password" required>
-
-    <button type="submit">Zaloguj się</button>
-</form>
+    <form action="{{ path('admin_login') }}" method="post">
+        <div>
+            <label for="username">Nazwa użytkownika:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
+        </div>
+        <div>
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="_password" required>
+        </div>
+        <button type="submit">Zaloguj</button>
+    </form>
 {% endblock %}
