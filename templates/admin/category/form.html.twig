@@ -1,0 +1,38 @@
+{# templates/admin/category/form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ category is defined ? 'Edytuj kategorię' : 'Nowa kategoria' }}
+{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">{{ category is defined ? 'Edytuj kategorię' : 'Dodaj nową kategorię' }}</h1>
+
+<div class="card p-4 mb-3">
+    {{ form_start(form) }}
+
+        {# Globalne błędy formularza #}
+        {% if form.vars.errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    {% for error in form.vars.errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <button class="btn btn-primary">
+            {{ category is defined ? 'Zapisz zmiany' : 'Dodaj kategorię' }}
+        </button>
+    {{ form_end(form) }}
+</div>
+
+<a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Powrót do panelu administratora</a>
+{% endblock %}

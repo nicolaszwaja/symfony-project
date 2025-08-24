@@ -3,12 +3,43 @@
 {% block title %}Edytuj post{% endblock %}
 
 {% block body %}
-<h1>Edytuj post</h1>
+<h1 class="mb-4">Edytuj post</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary mt-3">Zapisz zmiany</button>
-{{ form_end(form) }}
+<div class="card p-4 mb-3">
+    {{ form_start(form) }}
 
-<a href="{{ path('posts_list') }}">Powrót do listy postów</a>
+        {# Globalne błędy formularza #}
+        {% if form.vars.errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    {% for error in form.vars.errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.content) }}
+            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+            {{ form_errors(form.content) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+            {{ form_errors(form.category) }}
+        </div>
+
+        <button class="btn btn-primary">Zapisz zmiany</button>
+    {{ form_end(form) }}
+</div>
+
+<a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Powrót do panelu administratora</a>
 {% endblock %}

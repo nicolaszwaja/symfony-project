@@ -2,6 +2,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 #[ORM\Entity]
 class Post
@@ -10,13 +13,22 @@ class Post
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)] // ← teraz obowiązkowa kategoria
+    #[Assert\NotNull(message: "Post musi mieć przypisaną kategorię.")]
     private ?Category $category = null;
 
     #[ORM\Column(type:"string", length:255)]
+    #[Assert\NotBlank(message: "Tytuł nie może być pusty.")]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: "Tytuł musi mieć przynajmniej {{ limit }} znaków.",
+        maxMessage: "Tytuł nie może być dłuższy niż {{ limit }} znaków."
+    )]
     private string $title;
 
     #[ORM\Column(type:"text")]
+    #[Assert\NotBlank(message: "Treść posta nie może być pusta.")]
     private string $content;
 
     #[ORM\Column(type:"datetime_immutable")]

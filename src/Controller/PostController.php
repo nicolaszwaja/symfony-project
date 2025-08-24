@@ -76,14 +76,18 @@ class PostController extends AbstractController
     {
         $post = new Post();
         $post->setCreatedAt(new \DateTimeImmutable());
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, [
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',      // domyślna nazwa
+            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('post_list');
+            return $this->redirectToRoute('admin_dashboard');;
         }
 
         return $this->render('post/new.html.twig', [
@@ -94,12 +98,24 @@ class PostController extends AbstractController
     #[Route('/{id}/edit', name: 'post_edit')]
     public function edit(Post $post, Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, [
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',      // domyślna nazwa
+            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+        ]);
         $form->handleRequest($request);
 
+        // debug bez wysyłania outputu do przeglądarki
+        if ($form->isSubmitted() && !$form->isValid()) {
+            // np. logujemy błędy lub pokazujemy jako flash message
+            foreach ($form->getErrors(true, false) as $error) {
+                $this->addFlash('danger', $error->getMessage());
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            return $this->redirectToRoute('post_list');
+            $em->flush(); 
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('post/edit.html.twig', [
@@ -107,6 +123,9 @@ class PostController extends AbstractController
             'post' => $post,
         ]);
     }
+
+
+
 
     #[Route('/admin/posts/{id}/delete', name: 'post_delete', methods: ['POST'])]
     public function delete(Post $post, EntityManagerInterface $em): Response
@@ -118,4 +137,21 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('admin_dashboard');
     }
+
+    #[Route('/admin/post/{id}/change-category', name: 'post_change_category', methods: ['POST'])]
+    public function changeCategory(
+        Request $request,
+        Post $post,
+        EntityManagerInterface $em,
+        CategoryRepository $categoryRepo
+    ): Response {
+        $categoryId = $request->request->get('category_id');
+        $category = $categoryId ? $categoryRepo->find($categoryId) : null;
+
+        $post->setCategory($category);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_dashboard');
+    }
+
 }

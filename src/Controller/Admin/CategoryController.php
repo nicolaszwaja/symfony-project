@@ -28,7 +28,11 @@ class CategoryController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryType::class, $category, [
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',      // domyślna nazwa
+            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -38,37 +42,37 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('categories_list');
         }
 
-        return $this->render('admin/category/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('admin_dashboard');
     }
 
     #[Route('/{id}/edit', name: 'edit')]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryType::class, $category, [
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',      // domyślna nazwa
+            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($category);
             $em->flush();
-
-            return $this->redirectToRoute('categories_list');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
-        return $this->render('admin/category/edit.html.twig', [
-            'form' => $form->createView(),
-            'category' => $category,
-        ]);
+
+        return $this->redirectToRoute('admin_dashboard');
     }
+
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $em->remove($category);
             $em->flush();
+            $this->addFlash('success', 'Kategoria została usunięta.');
         }
 
-        return $this->redirectToRoute('categories_list');
-    }
-
+        return $this->redirectToRoute('admin_dashboard');    }
 }
