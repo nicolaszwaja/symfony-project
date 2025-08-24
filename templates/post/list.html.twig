@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista postów{% endblock %}
+
+{% block body %}
+<h1 style="margin-bottom: 40px;">Lista postów</h1>
+
+<div class="categories mb-4">
+    <strong>Kategorie:</strong>
+    <a href="{{ path('post_list') }}" class="{{ currentCategory is null ? 'active' : '' }}">Wszystkie</a>
+    {% for category in categories %}
+        <a href="{{ path('post_list', {category: category.id}) }}"
+           class="{{ currentCategory == category.id ? 'active' : '' }}">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
+
+
+<div class="posts-list">
+    {% for post in pagination %}
+        <article>
+            <h2><a href="{{ path('post_show', {id: post.id}) }}">{{ post.title }}</a></h2>
+            <p>{{ post.content|slice(0, 200) ~ '...' }}</p>
+            <small>Dodano: {{ post.createdAt|date('Y-m-d H:i') }}</small>
+        </article>
+    {% else %}
+        <p>Brak postów.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+
+{% endblock %}

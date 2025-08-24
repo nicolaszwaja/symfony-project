@@ -2,38 +2,47 @@
 // src/Controller/PostController.php
 namespace App\Controller;
 
-
 use App\Entity\Comment;
 use App\Form\CommentTypeForm;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use App\Repository\PostRepository;
+use App\Repository\CategoryRepository;
 use App\Entity\Post;
 use App\Form\PostType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
-
-class PostController extends AbstractController{
-    #[Route('/posts', name: 'posts_list')]
-    public function list(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
+class PostController extends AbstractController
+{
+    #[Route('/posts', name: 'post_list')]
+    public function list(PostRepository $postRepository, CategoryRepository $categoryRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $postRepository->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
-            ->getQuery();
+        $categoryId = $request->query->get('category');
+
+        $query = $postRepository->createQueryBuilder('p');
+
+        if ($categoryId) {
+            $query->andWhere('p.category = :cat')->setParameter('cat', $categoryId);
+        }
 
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            $query,
+            $request->query->getInt('page', 1),
+            10
         );
 
-        return $this->render('post/index.html.twig', [
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('post/list.html.twig', [
             'pagination' => $pagination,
+            'categories' => $categories,
+            'currentCategory' => $categoryId,
         ]);
     }
+
     #[Route('/posts/{id}', name: 'post_show')]
     public function show(int $id, PostRepository $postRepository, Request $request, EntityManagerInterface $em): Response
     {
@@ -42,22 +51,13 @@ class PostController extends AbstractController{
             throw $this->createNotFoundException('Post not found');
         }
 
-        // Tworzymy nowy komentarz przypisany do tego posta
         $comment = new Comment();
         $comment->setPost($post);
         $comment->setCreatedAt(new \DateTimeImmutable());
 
-        // Tworzymy formularz
-        // $form = $this->createForm(CommentTypeForm::class, $comment);
-        $form = $this->createForm(CommentTypeForm::class, $comment, [
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'post_item', // dowolna nazwa
-        ]);
-        
+        $form = $this->createForm(CommentTypeForm::class, $comment);
         $form->handleRequest($request);
 
-        // Obsługa formularza w tym samym kontrolerze (opcjonalnie)
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($comment);
             $em->flush();
@@ -67,28 +67,25 @@ class PostController extends AbstractController{
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'form' => $form->createView(),  // przekazujemy form do szablonu
+            'form' => $form->createView(),
         ]);
     }
+
     #[Route('/new', name: 'post_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $post = new Post();
         $post->setCreatedAt(new \DateTimeImmutable());
-        $form = $this->createForm(PostType::class, $post, [
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'post_item', // dowolna nazwa
-        ]);
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($post);
             $em->flush();
-    
-            return $this->redirectToRoute('posts_list');
+
+            return $this->redirectToRoute('post_list');
         }
-    
+
         return $this->render('post/new.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -102,8 +99,7 @@ class PostController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-
-            return $this->redirectToRoute('posts_list');
+            return $this->redirectToRoute('post_list');
         }
 
         return $this->render('post/edit.html.twig', [
@@ -111,6 +107,7 @@ class PostController extends AbstractController{
             'post' => $post,
         ]);
     }
+
     #[Route('/admin/posts/{id}/delete', name: 'post_delete', methods: ['POST'])]
     public function delete(Post $post, EntityManagerInterface $em): Response
     {
@@ -121,6 +118,4 @@ class PostController extends AbstractController{
 
         return $this->redirectToRoute('admin_dashboard');
     }
-
 }
-

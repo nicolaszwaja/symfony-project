@@ -1,0 +1,15 @@
+.categories a {
+    margin-right: 10px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.categories a.active {
+    font-weight: bold;
+    color: #ff00ff;       /* niebieski dla wyróżnienia */
+    background-color: #ffe0f0; /* opcjonalne podświetlenie */
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
