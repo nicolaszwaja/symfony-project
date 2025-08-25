@@ -30,8 +30,8 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category, [
             'csrf_protection' => true,
-            'csrf_field_name' => '_token',      // domyślna nazwa
-            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'post_item',
         ]);
         $form->handleRequest($request);
 
@@ -42,7 +42,10 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('categories_list');
         }
 
-        return $this->redirectToRoute('admin_dashboard');
+        // renderujemy formularz, jeśli nie jest przesłany lub jest niepoprawny
+        return $this->render('admin/category/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/{id}/edit', name: 'edit')]
@@ -50,20 +53,23 @@ class CategoryController extends AbstractController
     {
         $form = $this->createForm(CategoryType::class, $category, [
             'csrf_protection' => true,
-            'csrf_field_name' => '_token',      // domyślna nazwa
-            'csrf_token_id'   => 'post_item',   // musi być zgodne w formularzu
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'post_item',
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($category);
             $em->flush();
             return $this->redirectToRoute('admin_dashboard');
         }
 
-
-        return $this->redirectToRoute('admin_dashboard');
+        // renderujemy formularz przy GET lub błędnym POST
+        return $this->render('admin/category/edit.html.twig', [
+            'form' => $form->createView(),
+            'category' => $category,
+        ]);
     }
+
 
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response

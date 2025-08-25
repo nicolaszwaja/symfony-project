@@ -17,18 +17,18 @@
         }
 
         .categories a.active {
-            font-weight: bold;        /* pogrubienie */
-            color: #007bff;           /* niebieski */
-            background-color: #e0f0ff; /* lekkie podświetlenie */
+            font-weight: bold;        
+            color: #007bff;           
+            background-color: #e0f0ff; 
             border-radius: 4px;
         }
 
         .posts-list article {
-            margin-bottom: 30px; /* odstęp między postami */
+            margin-bottom: 30px; 
         }
 
         h1.page-title {
-            margin-bottom: 40px; /* odstęp pod nagłówkiem */
+            margin-bottom: 40px; 
         }
     </style>
     {% endblock %}
@@ -46,8 +46,11 @@
     </main>
 
     <footer class="container my-4">
-        <a href="{{ path('homepage') }}" class="btn btn-secondary">Przenieś do strony głównej</a>
+        <a href="{{ path('homepage') }}" class="btn btn-secondary">
+            {{ 'button.homepage'|trans({}, 'messages') }}
+        </a>
     </footer>
+
 
     <!-- Bootstrap 5 JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -3,31 +3,43 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
-<article>
-    <h1>{{ post.title }}</h1>
-    <p><small>Dodano: {{ post.createdAt|date('Y-m-d H:i') }}</small></p>
+<article class="mb-3">
+    <h1 class="h4">{{ post.title }}</h1>
+    <p class="text-muted mb-1"><small>Dodano: {{ post.createdAt|date('Y-m-d H:i') }}</small></p>
     <div>{{ post.content|raw }}</div>
 </article>
 
-<h3>Dodaj komentarz</h3>
+<div class="card mb-3 p-2">
+<h3 class="h5 mb-2">Dodaj komentarz</h3>
+    {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+        <div class="d-flex gap-2 mb-2">
+            <div class="flex-fill">
+                {{ form_widget(form.nickname, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'Twój nick'}}) }}
+                {{ form_errors(form.nickname) }}
+            </div>
+            <div class="flex-fill">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'Twój email'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div class="mb-2">
+            {{ form_widget(form.content, {'attr': {'class': 'form-control form-control-sm', 'rows': 2, 'placeholder': 'Twój komentarz'}}) }}
+            {{ form_errors(form.content) }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Dodaj</button>
+    {{ form_end(form) }}
+</div>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary mt-3">Dodaj komentarz</button>
-{{ form_end(form) }}
-
-
-<h2>Komentarze</h2>
+<h2 class="h6 mb-1">Komentarze</h2>
 
 {% for comment in post.comments %}
-    <div class="mb-3 border p-2">
-        <small>{{ comment.createdAt|date('Y-m-d H:i') }}</small>
-        <p>{{ comment.content }}</p>
+    <div class="mb-1 border rounded p-1">
+        <p class="mb-0"><strong>{{ comment.nickname }}</strong> <small class="text-muted">{{ comment.createdAt|date('Y-m-d H:i') }}</small></p>
+        <p class="mb-0">{{ comment.content }}</p>
     </div>
 {% else %}
-    <p>Brak komentarzy.</p>
+    <p class="text-muted">Brak komentarzy.</p>
 {% endfor %}
 
-<a href="{{ path('posts_list') }}" class="btn btn-primary mt-3">Powrót do listy postów</a>
-
+<a href="{{ path('post_list') }}" class="btn btn-secondary btn-sm mt-1">Powrót do listy postów</a>
 {% endblock %}

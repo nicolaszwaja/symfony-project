@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="title.post_list">
+        <source>title.post_list</source>
+        <target>Posts List</target>
+      </trans-unit>
+
+      <trans-unit id="label.categories">
+        <source>label.categories</source>
+        <target>Categories</target>
+      </trans-unit>
+
+      <trans-unit id="label.all">
+        <source>label.all</source>
+        <target>All</target>
+      </trans-unit>
+
+      <trans-unit id="label.added">
+        <source>label.added</source>
+        <target>Added</target>
+      </trans-unit>
+
+      <trans-unit id="message.no_posts">
+        <source>message.no_posts</source>
+        <target>No posts</target>
+      </trans-unit>
+
+      <trans-unit id="title.homepage">
+        <source>title.homepage</source>
+        <target>Homepage</target>
+      </trans-unit>
+
+      <trans-unit id="button.view_posts">
+        <source>button.view_posts</source>
+        <target>View All Posts</target>
+      </trans-unit>
+
+      <trans-unit id="button.login_admin">
+        <source>button.login_admin</source>
+        <target>Login as Admin</target>
+      </trans-unit>
+
+      <trans-unit id="homepage.welcome">
+        <source>homepage.welcome</source>
+        <target>Welcome to the homepage!</target>
+      </trans-unit>
+
+      <trans-unit id="homepage.view_posts">
+        <source>homepage.view_posts</source>
+        <target>View all posts</target>
+      </trans-unit>
+
+      <trans-unit id="homepage.login_admin">
+        <source>homepage.login_admin</source>
+        <target>Login as admin</target>
+      </trans-unit>
+
+      <trans-unit id="language.polish">
+        <source>language.polish</source>
+        <target>Polish</target>
+      </trans-unit>
+
+      <trans-unit id="language.english">
+        <source>language.english</source>
+        <target>English</target>
+      </trans-unit>
+<trans-unit id="button.homepage"><source>button.homepage</source><target>Homepage</target></trans-unit>
+
+    </body>
+  </file>
+</xliff>

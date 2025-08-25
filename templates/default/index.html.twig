@@ -1,14 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Strona główna{% endblock %}
+{% block title %}{{ 'title.homepage'|trans }}{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <div class="text-center">
-        <h1 class="display-4">Witamy na stronie głównej!</h1>
-        <p class="lead mt-3">To jest startowy szablon Twojego projektu.</p>
-        <a href="{{ path('post_list') }}" class="btn btn-primary mt-4">Zobacz wszystkie posty</a>
-        <a href="{{ path('app_login') }}" class="btn btn-primary mt-4">Zaloguj jako admin</a>
+<div class="container mt-5 text-center">
+    <h1 class="display-4">{{ 'homepage.welcome'|trans }}</h1>
+
+    <div class="mt-4">
+        <a href="{{ path('post_list', {'_locale': app.request.locale}) }}" class="btn btn-primary me-2">
+            {{ 'button.view_posts'|trans }}
+        </a>
+        <a href="{{ path('app_login', {'_locale': app.request.locale}) }}" class="btn btn-primary">
+            {{ 'button.login_admin'|trans }}
+        </a>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all | merge({'_locale': 'pl'})) }}" class="btn btn-outline-primary me-2">
+            {{ 'language.polish'|trans }}
+        </a>
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all | merge({'_locale': 'en'})) }}" class="btn btn-outline-primary">
+            {{ 'language.english'|trans }}
+        </a>
     </div>
 </div>
 {% endblock %}

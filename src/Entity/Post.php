@@ -2,9 +2,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
-
 
 #[ORM\Entity]
 class Post
@@ -13,7 +13,7 @@ class Post
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
-    #[ORM\JoinColumn(nullable: false)] // ← teraz obowiązkowa kategoria
+    #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull(message: "Post musi mieć przypisaną kategorię.")]
     private ?Category $category = null;
 
@@ -33,6 +33,14 @@ class Post
 
     #[ORM\Column(type:"datetime_immutable")]
     private \DateTimeImmutable $createdAt;
+
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: Comment::class, cascade: ["remove"], orphanRemoval: true)]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     // -------------------
     // Gettery i Settery
@@ -84,6 +92,35 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
+            }
+        }
+
         return $this;
     }
 }

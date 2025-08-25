@@ -22,10 +22,12 @@ class PostController extends AbstractController
     {
         $categoryId = $request->query->get('category');
 
-        $query = $postRepository->createQueryBuilder('p');
+        $query = $postRepository->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC'); // <-- tutaj sortowanie od najnowszych
 
         if ($categoryId) {
-            $query->andWhere('p.category = :cat')->setParameter('cat', $categoryId);
+            $query->andWhere('p.category = :cat')
+                ->setParameter('cat', $categoryId);
         }
 
         $pagination = $paginator->paginate(
@@ -42,6 +44,7 @@ class PostController extends AbstractController
             'currentCategory' => $categoryId,
         ]);
     }
+
 
     #[Route('/posts/{id}', name: 'post_show')]
     public function show(int $id, PostRepository $postRepository, Request $request, EntityManagerInterface $em): Response
