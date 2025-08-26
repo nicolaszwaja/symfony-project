@@ -5,41 +5,58 @@
 {% block body %}
 <article class="mb-3">
     <h1 class="h4">{{ post.title }}</h1>
-    <p class="text-muted mb-1"><small>Dodano: {{ post.createdAt|date('Y-m-d H:i') }}</small></p>
+    <p class="text-muted mb-1">
+        <small>{{ 'label.added'|trans }}: {{ post.createdAt|date('Y-m-d H:i') }}</small>
+    </p>
     <div>{{ post.content|raw }}</div>
 </article>
 
 <div class="card mb-3 p-2">
-<h3 class="h5 mb-2">Dodaj komentarz</h3>
+    <h3 class="h5 mb-2">{{ 'comment.add'|trans }}</h3>
     {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
         <div class="d-flex gap-2 mb-2">
             <div class="flex-fill">
-                {{ form_widget(form.nickname, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'Twój nick'}}) }}
+                {{ form_widget(form.nickname, {'attr': {
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'comment.nickname'|trans
+                }}) }}
                 {{ form_errors(form.nickname) }}
             </div>
             <div class="flex-fill">
-                {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'Twój email'}}) }}
+                {{ form_widget(form.email, {'attr': {
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'comment.email'|trans
+                }}) }}
                 {{ form_errors(form.email) }}
             </div>
         </div>
         <div class="mb-2">
-            {{ form_widget(form.content, {'attr': {'class': 'form-control form-control-sm', 'rows': 2, 'placeholder': 'Twój komentarz'}}) }}
+            {{ form_widget(form.content, {'attr': {
+                'class': 'form-control form-control-sm',
+                'rows': 2,
+                'placeholder': 'comment.content'|trans
+            }}) }}
             {{ form_errors(form.content) }}
         </div>
-        <button type="submit" class="btn btn-primary btn-sm">Dodaj</button>
+        <button type="submit" class="btn btn-primary btn-sm">{{ 'button.add'|trans }}</button>
     {{ form_end(form) }}
 </div>
 
-<h2 class="h6 mb-1">Komentarze</h2>
+<h2 class="h6 mb-1">{{ 'comment.list'|trans }}</h2>
 
 {% for comment in post.comments %}
     <div class="mb-1 border rounded p-1">
-        <p class="mb-0"><strong>{{ comment.nickname }}</strong> <small class="text-muted">{{ comment.createdAt|date('Y-m-d H:i') }}</small></p>
+        <p class="mb-0">
+            <strong>{{ comment.nickname }}</strong>
+            <small class="text-muted">{{ comment.createdAt|date('Y-m-d H:i') }}</small>
+        </p>
         <p class="mb-0">{{ comment.content }}</p>
     </div>
 {% else %}
-    <p class="text-muted">Brak komentarzy.</p>
+    <p class="text-muted">{{ 'comment.none'|trans }}</p>
 {% endfor %}
 
-<a href="{{ path('post_list') }}" class="btn btn-secondary btn-sm mt-1">Powrót do listy postów</a>
+<a href="{{ path('post_list') }}" class="btn btn-secondary btn-sm mt-1">
+    {{ 'button.back_to_posts'|trans }}
+</a>
 {% endblock %}

@@ -7,11 +7,6 @@
         <target>Lista postów</target>
       </trans-unit>
 
-      <trans-unit id="label.categories">
-        <source>label.categories</source>
-        <target>Kategorie</target>
-      </trans-unit>
-
       <trans-unit id="label.all">
         <source>label.all</source>
         <target>Wszystkie</target>
@@ -24,7 +19,7 @@
 
       <trans-unit id="message.no_posts">
         <source>message.no_posts</source>
-        <target>Brak postów</target>
+        <target>Brak postów.</target>
       </trans-unit>
 
       <trans-unit id="title.homepage">
@@ -66,7 +61,177 @@
         <source>language.english</source>
         <target>Angielski</target>
       </trans-unit>
-<trans-unit id="button.homepage"><source>button.homepage</source><target>Strona główna</target></trans-unit>
+
+      <trans-unit id="button.homepage">
+        <source>button.homepage</source>
+        <target>Strona główna</target>
+      </trans-unit>
+
+      <trans-unit id="comment.add">
+        <source>comment.add</source>
+        <target>Dodaj komentarz</target>
+      </trans-unit>
+
+      <trans-unit id="comment.nickname">
+        <source>comment.nickname</source>
+        <target>Twój nick</target>
+      </trans-unit>
+
+      <trans-unit id="comment.email">
+        <source>comment.email</source>
+        <target>Twój email</target>
+      </trans-unit>
+
+      <trans-unit id="comment.content">
+        <source>comment.content</source>
+        <target>Twój komentarz</target>
+      </trans-unit>
+
+      <trans-unit id="comment.list">
+        <source>comment.list</source>
+        <target>Komentarze</target>
+      </trans-unit>
+
+      <trans-unit id="comment.none">
+        <source>comment.none</source>
+        <target>Brak komentarzy.</target>
+      </trans-unit>
+
+      <trans-unit id="button.add">
+        <source>button.add</source>
+        <target>Dodaj</target>
+      </trans-unit>
+
+      <trans-unit id="button.back_to_posts">
+        <source>button.back_to_posts</source>
+        <target>Powrót do listy postów</target>
+      </trans-unit>
+
+      <trans-unit id="title.login_admin">
+        <source>title.login_admin</source>
+        <target>Logowanie Admina</target>
+      </trans-unit>
+
+      <trans-unit id="label.username">
+        <source>label.username</source>
+        <target>Nazwa użytkownika</target>
+      </trans-unit>
+
+      <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Hasło</target>
+      </trans-unit>
+
+      <trans-unit id="button.login">
+        <source>button.login</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+
+      <trans-unit id="title.admin_panel">
+        <source>title.admin_panel</source>
+        <target>Panel Administratora</target>
+      </trans-unit>
+
+      <trans-unit id="label.posts">
+        <source>label.posts</source>
+        <target>Posty</target>
+      </trans-unit>
+
+      <trans-unit id="label.categories">
+        <source>label.categories</source>
+        <target>Kategorie</target>
+      </trans-unit>
+
+      <trans-unit id="label.comments">
+        <source>label.comments</source>
+        <target>Komentarze</target>
+      </trans-unit>
+
+      <trans-unit id="button.add_post">
+        <source>button.add_post</source>
+        <target>Dodaj nowy post</target>
+      </trans-unit>
+
+      <trans-unit id="button.add_category">
+        <source>button.add_category</source>
+        <target>Dodaj nową kategorię</target>
+      </trans-unit>
+
+      <trans-unit id="button.edit">
+        <source>button.edit</source>
+        <target>Edytuj</target>
+      </trans-unit>
+
+      <trans-unit id="button.delete">
+        <source>button.delete</source>
+        <target>Usuń</target>
+      </trans-unit>
+
+      <trans-unit id="message.no_categories">
+        <source>message.no_categories</source>
+        <target>Brak kategorii.</target>
+      </trans-unit>
+
+      <trans-unit id="message.no_comments">
+        <source>message.no_comments</source>
+        <target>Brak komentarzy.</target>
+      </trans-unit>
+
+      <trans-unit id="message.confirm_delete_post">
+        <source>message.confirm_delete_post</source>
+        <target>Na pewno usunąć post?</target>
+      </trans-unit>
+
+      <trans-unit id="message.confirm_delete_category">
+        <source>message.confirm_delete_category</source>
+        <target>Na pewno usunąć kategorię?</target>
+      </trans-unit>
+
+      <trans-unit id="message.confirm_delete_comment">
+        <source>message.confirm_delete_comment</source>
+        <target>Na pewno usunąć komentarz?</target>
+      </trans-unit>
+
+      <trans-unit id="text.in_post">
+        <source>text.in_post</source>
+        <target>w poście:</target>
+      </trans-unit>
+
+      <trans-unit id="title.edit_post">
+          <source>title.edit_post</source>
+          <target>Edytuj post</target>
+      </trans-unit>
+
+        <trans-unit id="title.new_post">
+          <source>title.new_post</source>
+          <target>Nowy post</target>
+      </trans-unit>
+
+      <trans-unit id="label.category">
+          <source>label.category</source>
+          <target>Kategoria</target>
+      </trans-unit>
+
+      <trans-unit id="label.title">
+          <source>label.title</source>
+          <target>Tytuł</target>
+      </trans-unit>
+
+      <trans-unit id="label.content">
+          <source>label.content</source>
+          <target>Treść</target>
+      </trans-unit>
+
+      <trans-unit id="button.save_changes">
+          <source>button.save_changes</source>
+          <target>Zapisz zmiany</target>
+      </trans-unit>
+
+      <trans-unit id="button.back_to_admin">
+          <source>button.back_to_admin</source>
+          <target>Powrót do panelu administratora</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>

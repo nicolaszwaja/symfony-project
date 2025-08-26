@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Logowanie Admina{% endblock %}
+{% block title %}{{ 'title.login_admin'|trans }}{% endblock %}
 
 {% block body %}
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card p-4 shadow-sm" style="width: 360px;">
-        <h1 class="h4 text-center mb-3">Logowanie Admina</h1>
+        <h1 class="h4 text-center mb-3">{{ 'title.login_admin'|trans }}</h1>
 
         {% if error %}
             <div class="alert alert-danger">
@@ -15,16 +15,16 @@
 
         <form action="{{ path('admin_login') }}" method="post">
             <div class="mb-3">
-                <label for="username" class="form-label">Nazwa użytkownika</label>
+                <label for="username" class="form-label">{{ 'label.username'|trans }}</label>
                 <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required autofocus>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Hasło</label>
+                <label for="password" class="form-label">{{ 'label.password'|trans }}</label>
                 <input type="password" id="password" name="_password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Zaloguj</button>
+            <button type="submit" class="btn btn-primary w-100">{{ 'button.login'|trans }}</button>
         </form>
     </div>
 </div>
