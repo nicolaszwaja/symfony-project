@@ -2,23 +2,25 @@
 
 namespace App\Controller;
 
+use App\Service\DefaultServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    // / -> przekierowanie do domyślnego języka (pl)
+    public function __construct(private readonly DefaultServiceInterface $defaultService) {}
+
     #[Route('/', name: 'homepage_redirect')]
     public function redirectToDefaultLocale(): Response
     {
-        return $this->redirectToRoute('homepage', ['_locale' => 'pl']);
+        return $this->defaultService->getRedirectToDefaultLocale();
     }
 
-    // /pl/ lub /en/
     #[Route('/{_locale}/', name: 'homepage', requirements: ['_locale' => 'pl|en'])]
     public function index(): Response
     {
-        return $this->render('default/index.html.twig');
+        $data = $this->defaultService->getHomepageData();
+        return $this->render('default/index.html.twig', $data);
     }
 }

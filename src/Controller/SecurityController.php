@@ -1,32 +1,29 @@
 <?php
+
 namespace App\Controller;
 
+use App\Service\SecurityServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends AbstractController
 {
+    public function __construct(private readonly SecurityServiceInterface $securityService) {}
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $data = $this->securityService->getLoginData($authenticationUtils);
 
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error,
-        ]);
+        return $this->render('security/login.html.twig', $data);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Controller can be blank: it will be intercepted by the logout key on your firewall.
+        // Controller can be blank: it will be intercepted by the firewall.
         throw new \Exception('This should never be reached!');
     }
 }

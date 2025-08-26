@@ -1,20 +1,24 @@
 <?php
 
-// src/Controller/CommentController.php
 namespace App\Controller;
 
-use App\Entity\Comment; // ← to jest potrzebne!
+use App\Entity\Comment;
+use App\Form\CommentTypeForm;
+use App\Service\CommentServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
+    public function __construct(private readonly CommentServiceInterface $commentService) {}
+
     #[Route('/posts/{postId}/comments/add', name: 'comment_add', methods: ['POST'])]
-    public function add(Request $request, int $postId, EntityManagerInterface $em, PostRepository $postRepository): Response
+    public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
-        $post = $postRepository->find($postId);
+        $post = $this->commentService->getPostById($postId);
         if (!$post) {
             throw $this->createNotFoundException('Post nie istnieje');
         }
@@ -27,29 +31,22 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($comment);
-            $em->flush();
-
+            $this->commentService->addComment($comment, $em);
             return $this->redirectToRoute('post_show', ['id' => $postId]);
         }
 
-        // jeśli formularz jest na stronie posta, renderujemy z błędami
         return $this->render('post/show.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);
     }
 
-
     #[Route('/comments/{id}/delete', name: 'comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {
-        $em->remove($comment);
-        $em->flush();
-
+        $this->commentService->deleteComment($comment, $em);
         $this->addFlash('success', 'Komentarz został usunięty.');
 
         return $this->redirectToRoute('admin_dashboard');
     }
-
 }

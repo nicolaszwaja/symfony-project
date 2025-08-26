@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\Service\CategoryServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends AbstractController
 {
+    public function __construct(private readonly CategoryServiceInterface $categoryService) {}
+
     #[Route('/categories', name: 'category_index')]
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $this->categoryService->getAllCategories();
 
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
@@ -20,20 +22,10 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/categories/{id}/posts', name: 'category_posts')]
-    public function posts(int $id, CategoryRepository $categoryRepository): Response
+    public function posts(int $id): Response
     {
-        $category = $categoryRepository->find($id);
+        $data = $this->categoryService->getPostsByCategoryId($id);
 
-        if (!$category) {
-            throw $this->createNotFoundException('Kategoria nie istnieje.');
-        }
-
-        // Zakładamy, że relacja Category->posts jest zdefiniowana w encji
-        $posts = $category->getPosts();
-
-        return $this->render('category/posts.html.twig', [
-            'category' => $category,
-            'posts' => $posts,
-        ]);
+        return $this->render('category/posts.html.twig', $data);
     }
 }
