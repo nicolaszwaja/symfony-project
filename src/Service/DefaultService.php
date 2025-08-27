@@ -7,7 +7,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DefaultService implements DefaultServiceInterface
 {
-    public function __construct(private readonly RouterInterface $router) {}
+    public function __construct(private readonly RouterInterface $router)
+    {
+    }
 
     /**
      * Get redirect to default locale.

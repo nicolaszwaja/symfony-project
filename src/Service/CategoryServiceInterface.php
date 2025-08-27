@@ -16,7 +16,6 @@ interface CategoryServiceInterface
     /**
      * Get posts of a category by ID.
      *
-     * @param int $id
      * @return array{category: Category, posts: array}
      */
     public function getPostsByCategoryId(int $id): array;

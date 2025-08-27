@@ -8,7 +8,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategoryService implements CategoryServiceInterface
 {
-    public function __construct(private readonly CategoryRepository $categoryRepository) {}
+    public function __construct(private readonly CategoryRepository $categoryRepository)
+    {
+    }
 
     public function getAllCategories(): array
     {
@@ -18,7 +20,7 @@ class CategoryService implements CategoryServiceInterface
     public function getPostsByCategoryId(int $id): array
     {
         $category = $this->categoryRepository->find($id);
-        if (!$category) {
+        if (!$category instanceof \App\Entity\Category) {
             throw new NotFoundHttpException('Kategoria nie istnieje.');
         }
 

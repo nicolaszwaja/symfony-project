@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
         // ---------------------
         // Tworzymy 15 przykładowych postów
         // ---------------------
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 1; $i <= 15; ++$i) {
             $post = new Post();
             $post->setTitle("Przykładowy post #$i");
             $post->setContent("To jest treść przykładowego posta numer $i.");

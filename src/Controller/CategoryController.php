@@ -9,9 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends AbstractController
 {
-    public function __construct(private readonly CategoryServiceInterface $categoryService) {}
+    public function __construct(private readonly CategoryServiceInterface $categoryService)
+    {
+    }
 
-    #[Route('/categories', name: 'category_index')]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories', name: 'category_index')]
     public function index(): Response
     {
         $categories = $this->categoryService->getAllCategories();
@@ -21,7 +23,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/categories/{id}/posts', name: 'category_posts')]
+    #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}/posts', name: 'category_posts')]
     public function posts(int $id): Response
     {
         $data = $this->categoryService->getPostsByCategoryId($id);

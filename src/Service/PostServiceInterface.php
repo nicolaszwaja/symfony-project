@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\PostRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,8 +21,6 @@ interface PostServiceInterface
 
     /**
      * Get all categories.
-     *
-     * @return array
      */
     public function getCategories(): array;
 }

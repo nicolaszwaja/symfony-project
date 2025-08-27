@@ -8,10 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/comments', name: 'comments_')]
 class CommentController extends AbstractController
 {
-    #[Route('/', name: 'list')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/', name: 'comments_list')]
     public function list(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findAll();
@@ -20,13 +19,12 @@ class CommentController extends AbstractController
             'comments' => $comments,
         ]);
     }
-
-    #[Route('/{id}/delete', name: 'delete')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/{id}/delete', name: 'comments_delete')]
     public function delete(int $id, CommentRepository $commentRepository, EntityManagerInterface $em): Response
     {
         $comment = $commentRepository->find($id);
 
-        if ($comment) {
+        if ($comment instanceof \App\Entity\Comment) {
             $em->remove($comment);
             $em->flush();
         }

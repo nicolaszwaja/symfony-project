@@ -13,13 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
-    public function __construct(private readonly CommentServiceInterface $commentService) {}
+    public function __construct(private readonly CommentServiceInterface $commentService)
+    {
+    }
 
-    #[Route('/posts/{postId}/comments/add', name: 'comment_add', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/posts/{postId}/comments/add', name: 'comment_add', methods: ['POST'])]
     public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
         $post = $this->commentService->getPostById($postId);
-        if (!$post) {
+        if (!$post instanceof \App\Entity\Post) {
             throw $this->createNotFoundException('Post nie istnieje');
         }
 
@@ -32,6 +34,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commentService->addComment($comment, $em);
+
             return $this->redirectToRoute('post_show', ['id' => $postId]);
         }
 
@@ -41,7 +44,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/comments/{id}/delete', name: 'comment_delete', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/comments/{id}/delete', name: 'comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {
         $this->commentService->deleteComment($comment, $em);

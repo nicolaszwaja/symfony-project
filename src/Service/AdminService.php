@@ -11,8 +11,9 @@ class AdminService implements AdminServiceInterface
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly CategoryRepository $categoryRepository,
-        private readonly CommentRepository $commentRepository
-    ) {}
+        private readonly CommentRepository $commentRepository,
+    ) {
+    }
 
     public function getDashboardData(): array
     {

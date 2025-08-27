@@ -11,10 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/categories', name: 'categories_')]
 class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'list')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/', name: 'categories_list')]
     public function list(CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
@@ -23,8 +22,7 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
-
-    #[Route('/new', name: 'new')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/new', name: 'categories_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $category = new Category();
@@ -47,8 +45,7 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    #[Route('/{id}/edit', name: 'edit')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/edit', name: 'categories_edit')]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(CategoryType::class, $category, [
@@ -60,6 +57,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+
             return $this->redirectToRoute('admin_dashboard');
         }
 
@@ -69,9 +67,7 @@ class CategoryController extends AbstractController
             'category' => $category,
         ]);
     }
-
-
-    #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/delete', name: 'categories_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
@@ -80,5 +76,6 @@ class CategoryController extends AbstractController
             $this->addFlash('success', 'Kategoria została usunięta.');
         }
 
-        return $this->redirectToRoute('admin_dashboard');    }
+        return $this->redirectToRoute('admin_dashboard');
+    }
 }

@@ -6,11 +6,12 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CommentService implements CommentServiceInterface
 {
-    public function __construct(private readonly PostRepository $postRepository) {}
+    public function __construct(private readonly PostRepository $postRepository)
+    {
+    }
 
     public function getPostById(int $id): ?Post
     {

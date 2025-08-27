@@ -1,6 +1,7 @@
 <?php
 
 // src/Form/PostType.php
+
 namespace App\Form;
 
 use App\Entity\Post;

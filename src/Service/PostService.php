@@ -15,8 +15,9 @@ class PostService implements PostServiceInterface
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly CategoryRepository $categoryRepository,
-        private readonly PaginatorInterface $paginator
-    ) {}
+        private readonly PaginatorInterface $paginator,
+    ) {
+    }
 
     public function getPaginatedPosts(Request $request, int $page, int $limit = 10): PaginationInterface
     {

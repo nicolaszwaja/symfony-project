@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,32 +10,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 class Post
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type:"integer")]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type:'integer')]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotNull(message: "Post musi mieć przypisaną kategorię.")]
+    #[Assert\NotNull(message: 'Post musi mieć przypisaną kategorię.')]
     private ?Category $category = null;
 
-    #[ORM\Column(type:"string", length:255)]
-    #[Assert\NotBlank(message: "Tytuł nie może być pusty.")]
+    #[ORM\Column(type:'string', length:255)]
+    #[Assert\NotBlank(message: 'Tytuł nie może być pusty.')]
     #[Assert\Length(
         min: 5,
         max: 255,
-        minMessage: "Tytuł musi mieć przynajmniej {{ limit }} znaków.",
-        maxMessage: "Tytuł nie może być dłuższy niż {{ limit }} znaków."
+        minMessage: 'Tytuł musi mieć przynajmniej {{ limit }} znaków.',
+        maxMessage: 'Tytuł nie może być dłuższy niż {{ limit }} znaków.'
     )]
     private string $title;
 
-    #[ORM\Column(type:"text")]
-    #[Assert\NotBlank(message: "Treść posta nie może być pusta.")]
+    #[ORM\Column(type:'text')]
+    #[Assert\NotBlank(message: 'Treść posta nie może być pusta.')]
     private string $content;
 
-    #[ORM\Column(type:"datetime_immutable")]
+    #[ORM\Column(type:'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\OneToMany(mappedBy: "post", targetEntity: Comment::class, cascade: ["remove"], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $comments;
 
     public function __construct()
@@ -59,6 +60,7 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -70,6 +72,7 @@ class Post
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -81,6 +84,7 @@ class Post
     public function setContent(string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -92,6 +96,7 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -115,10 +120,8 @@ class Post
 
     public function removeComment(Comment $comment): self
     {
-        if ($this->comments->removeElement($comment)) {
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
-            }
+        if ($this->comments->removeElement($comment) && $comment->getPost() === $this) {
+            $comment->setPost(null);
         }
 
         return $this;

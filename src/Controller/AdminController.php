@@ -9,9 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
-    public function __construct(private readonly AdminServiceInterface $adminService) {}
+    public function __construct(private readonly AdminServiceInterface $adminService)
+    {
+    }
 
-    #[Route('/admin', name: 'admin_dashboard')]
+    #[\Symfony\Component\Routing\Attribute\Route('/admin', name: 'admin_dashboard')]
     public function dashboard(): Response
     {
         $data = $this->adminService->getDashboardData();

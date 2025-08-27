@@ -24,5 +24,4 @@ class CategoryType extends AbstractType
             'data_class' => Category::class,
         ]);
     }
-
 }

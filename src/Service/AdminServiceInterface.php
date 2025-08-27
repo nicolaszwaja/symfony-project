@@ -2,10 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\Post;
-use App\Entity\Category;
-use App\Entity\Comment;
-
 interface AdminServiceInterface
 {
     /**
