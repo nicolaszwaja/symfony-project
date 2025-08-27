@@ -1,6 +1,6 @@
 # Symfony Blog Project
 
-Projekt bloga w Symfony (Symfony 6/7) z obsługą wielu języków (PL/EN), systemem postów, kategorii i komentarzy.
+Projekt bloga w Symfony.
 
 ## Wymagania
 
@@ -21,7 +21,7 @@ Projekt bloga w Symfony (Symfony 6/7) z obsługą wielu języków (PL/EN), syste
     ```bash
     composer install
 
-1. **Ustaw dane do połączenia z bazą danych, Skonfiguruj plik .env**
+1. **Ustaw dane do połączenia z bazą danych, skonfiguruj plik .env**
    ```bash
     DATABASE_URL="mysql://user:password@127.0.0.1:3306/symfony_project"
 1. **Utwórz bazę danych i wykonaj migracje**
@@ -32,8 +32,6 @@ Projekt bloga w Symfony (Symfony 6/7) z obsługą wielu języków (PL/EN), syste
 1. **Uruchom serwer deweloperski**
    ```bash
     php -S 127.0.0.1:8000 -t public
-
-
 
 ## Funkcjonalności
 
