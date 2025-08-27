@@ -4,13 +4,16 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class CategoryControllerTest extends WebTestCase
+class CategoryControllerTest extends WebTestCase
 {
     public function testIndex(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/category');
+        $url = $client->getContainer()->get('router')->generate('category_index');
+        $client->request('GET', $url);
 
-        self::assertResponseIsSuccessful();
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('h1');
     }
+
 }
