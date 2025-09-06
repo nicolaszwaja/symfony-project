@@ -17,22 +17,34 @@ class CommentTypeForm extends AbstractType
     {
         $builder
             ->add('nickname', TextType::class, [
-                'label' => 'Twój nick',
+                'label' => 'comment.nickname',
                 'constraints' => [
-                    new NotBlank(['message' => 'Nick nie może być pusty']),
-                    new Length(['max' => 50, 'maxMessage' => 'Nick może mieć maksymalnie {{ limit }} znaków']),
+                    new NotBlank(),
+                    new Length(['max' => 50]),
+                ],
+                'attr' => [
+                    'class' => 'form-control form-control-sm',
+                    'placeholder' => 'comment.nickname',
                 ],
             ])
             ->add('email', TextType::class, [
-                'label' => 'Twój email',
-                'attr' => ['class' => 'form-control form-control-sm', 'placeholder' => 'Twój email'],
+                'label' => 'comment.email',
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-control form-control-sm',
+                    'placeholder' => 'comment.email',
+                ],
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Twój komentarz',
+                'label' => 'comment.content',
                 'constraints' => [
-                    new NotBlank(['message' => 'Komentarz nie może być pusty']),
-                    new Length(['max' => 1000, 'maxMessage' => 'Komentarz może mieć maksymalnie {{ limit }} znaków']),
+                    new NotBlank(),
+                    new Length(['max' => 1000]),
+                ],
+                'attr' => [
+                    'class' => 'form-control form-control-sm',
+                    'rows' => 2,
+                    'placeholder' => 'comment.content',
                 ],
             ]);
     }
@@ -44,6 +56,7 @@ class CommentTypeForm extends AbstractType
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id'   => 'post_comment',
+            'translation_domain' => 'validators', // dzięki temu klucze będą tłumaczone
         ]);
     }
 }

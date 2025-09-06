@@ -37,7 +37,7 @@ class PostType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'placeholder' => '-- wybierz kategorię --',
+                'placeholder' => 'label.select_category',
                 'label' => 'Kategoria',
                 'attr' => ['class' => 'form-select'],
                 'required' => true,

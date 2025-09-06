@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="post.category.not_null">
+        <source>Musisz wybrać kategorię.</source>
+        <target>You must select a category.</target>
+      </trans-unit>
+
+      <trans-unit id="post.title.not_blank">
+        <source>Tytuł nie może być pusty.</source>
+        <target>Title cannot be empty.</target>
+      </trans-unit>
+
+      <trans-unit id="post.title.min_length">
+        <source>post.title.min_length</source>
+        <target>Title must be at least {{ limit }} characters.</target>
+      </trans-unit>
+
+      <trans-unit id="post.title.max_length">
+        <source>post.title.max_length</source>
+        <target>Title cannot be longer than {{ limit }} characters.</target>
+      </trans-unit>
+
+      <trans-unit id="post.content.not_blank">
+        <source>Treść nie może być pusta.</source>
+        <target>Content cannot be empty.</target>
+      </trans-unit>
+
+      <trans-unit id="comment.nickname.not_blank">
+        <source>Nick nie może być pusty.</source>
+        <target>Nick cannot be empty.</target>
+      </trans-unit>
+
+      <trans-unit id="comment.content.not_blank">
+        <source>Komentarz nie może być pusty.</source>
+        <target>Comment cannot be empty.</target>
+      </trans-unit> 
+    </body>
+  </file>
+</xliff>

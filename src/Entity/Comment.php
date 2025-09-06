@@ -16,16 +16,14 @@ class Comment
     private Post $post;
 
     #[ORM\Column(type:'string', length:255)]
-    #[Assert\NotBlank(message: 'Nick nie może być pusty.')]
     private string $nickname;
 
     #[ORM\Column(type:'string', length:255)]
-    #[Assert\NotBlank(message: 'Email nie może być pusty.')]
-    #[Assert\Email(message: 'Nieprawidłowy format adresu email.')]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private string $email;
 
     #[ORM\Column(type:'text')]
-    #[Assert\NotBlank(message: 'Komentarz nie może być pusty.')]
     private string $content;
 
     #[ORM\Column(type:'datetime_immutable')]
@@ -46,7 +44,6 @@ class Comment
     public function setPost(Post $post): self
     {
         $this->post = $post;
-
         return $this;
     }
 
@@ -58,7 +55,6 @@ class Comment
     public function setNickname(string $nickname): self
     {
         $this->nickname = $nickname;
-
         return $this;
     }
 
@@ -70,7 +66,6 @@ class Comment
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -82,7 +77,6 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -94,7 +88,6 @@ class Comment
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 }

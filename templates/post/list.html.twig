@@ -32,7 +32,7 @@
                 </h2>
                 <p>{{ post.content|slice(0, 200) ~ '...' }}</p>
                 <small>
-                    {{ 'label.added'|trans }}: {{ post.createdAt|date('Y-m-d H:i') }}
+                    {{ 'label.added'|trans }}: {{ post.createdAt|format_datetime('medium', locale=app.request.locale) }}
                 </small>
             </article>
         {% else %}
@@ -41,6 +41,6 @@
     </div>
 
     <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
+        {{ knp_pagination_render(pagination, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
     </div>
 {% endblock %}

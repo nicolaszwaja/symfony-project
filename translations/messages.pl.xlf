@@ -173,9 +173,10 @@
       </trans-unit>
 
       <trans-unit id="message.no_comments">
-        <source>message.no_comments</source>
-        <target>Brak komentarzy.</target>
+          <source>message.no_comments</source>
+          <target>Brak komentarzy.</target>
       </trans-unit>
+
 
       <trans-unit id="message.confirm_delete_post">
         <source>message.confirm_delete_post</source>
@@ -232,6 +233,14 @@
           <target>Powrót do panelu administratora</target>
       </trans-unit>
 
+      <trans-unit id="label.select_section">
+        <source>label.select_section</source>
+        <target>Wybierz sekcję</target>
+      </trans-unit>
+      <trans-unit id="label.select_category">
+        <source>label.select_category</source>
+        <target>Wybierz kategorię</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

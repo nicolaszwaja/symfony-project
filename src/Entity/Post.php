@@ -15,21 +15,13 @@ class Post
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotNull(message: 'Post musi mieć przypisaną kategorię.')]
     private ?Category $category = null;
 
     #[ORM\Column(type:'string', length:255)]
-    #[Assert\NotBlank(message: 'Tytuł nie może być pusty.')]
-    #[Assert\Length(
-        min: 5,
-        max: 255,
-        minMessage: 'Tytuł musi mieć przynajmniej {{ limit }} znaków.',
-        maxMessage: 'Tytuł nie może być dłuższy niż {{ limit }} znaków.'
-    )]
+    #[Assert\Length(min: 5, max: 255)]
     private string $title;
 
     #[ORM\Column(type:'text')]
-    #[Assert\NotBlank(message: 'Treść posta nie może być pusta.')]
     private string $content;
 
     #[ORM\Column(type:'datetime_immutable')]
@@ -60,7 +52,6 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -72,7 +63,6 @@ class Post
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -84,7 +74,6 @@ class Post
     public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -96,7 +85,6 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -114,7 +102,6 @@ class Post
             $this->comments[] = $comment;
             $comment->setPost($this);
         }
-
         return $this;
     }
 
@@ -123,7 +110,6 @@ class Post
         if ($this->comments->removeElement($comment) && $comment->getPost() === $this) {
             $comment->setPost(null);
         }
-
         return $this;
     }
 }

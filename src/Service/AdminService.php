@@ -15,6 +15,7 @@ class AdminService implements AdminServiceInterface
     ) {
     }
 
+    // poprzednia metoda, jeśli potrzebujesz pełnej listy
     public function getDashboardData(): array
     {
         return [
@@ -22,5 +23,26 @@ class AdminService implements AdminServiceInterface
             'categories' => $this->categoryRepository->findAll(),
             'comments' => $this->commentRepository->findAll(),
         ];
+    }
+
+    // nowa metoda zwracająca QueryBuilder do paginacji postów
+    public function getPostsQuery()
+    {
+        return $this->postRepository->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC');
+    }
+
+    // metoda dla kategorii
+    public function getCategoriesQuery()
+    {
+        return $this->categoryRepository->createQueryBuilder('c')
+            ->orderBy('c.name', 'ASC');
+    }
+
+    // metoda dla komentarzy
+    public function getCommentsQuery()
+    {
+        return $this->commentRepository->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC');
     }
 }

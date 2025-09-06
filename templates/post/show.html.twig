@@ -6,14 +6,14 @@
 <article class="mb-3">
     <h1 class="h4">{{ post.title }}</h1>
     <p class="text-muted mb-1">
-        <small>{{ 'label.added'|trans }}: {{ post.createdAt|date('Y-m-d H:i') }}</small>
+        <small>{{ 'label.added'|trans }}: {{ post.createdAt|format_datetime('medium', locale=app.request.locale) }}</small>
     </p>
     <div>{{ post.content|raw }}</div>
 </article>
 
 <div class="card mb-3 p-2">
     <h3 class="h5 mb-2">{{ 'comment.add'|trans }}</h3>
-    {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+{{ form_start(form, {'attr': {'class': 'form-inline', 'novalidate': 'novalidate'}}) }}
         <div class="d-flex gap-2 mb-2">
             <div class="flex-fill">
                 {{ form_widget(form.nickname, {'attr': {

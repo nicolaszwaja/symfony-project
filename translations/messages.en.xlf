@@ -172,10 +172,11 @@
         <target>No categories found.</target>
       </trans-unit>
 
-      <trans-unit id="message.no_comments">
+    <trans-unit id="message.no_comments">
         <source>message.no_comments</source>
         <target>No comments found.</target>
-      </trans-unit>
+    </trans-unit>
+
 
       <trans-unit id="message.confirm_delete_post">
         <source>message.confirm_delete_post</source>
@@ -232,6 +233,14 @@
           <target>Back to Admin Panel</target>
       </trans-unit>
 
+      <trans-unit id="label.select_section">
+        <source>label.select_section</source>
+        <target>Select section</target>
+      </trans-unit>
+      <trans-unit id="label.select_category">
+        <source>label.select_category</source>
+        <target>Select category</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
