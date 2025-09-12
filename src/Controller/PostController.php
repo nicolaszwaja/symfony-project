@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
@@ -37,7 +36,7 @@ class PostController extends AbstractController
     public function show(int $id, Request $request, EntityManagerInterface $em): Response
     {
         $post = $this->postService->getPostById($id);
-        if (!$post instanceof \App\Entity\Post) {
+        if (!$post instanceof Post) {
             throw $this->createNotFoundException('Post not found');
         }
 

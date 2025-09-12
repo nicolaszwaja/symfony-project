@@ -6,7 +6,6 @@ use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
@@ -19,6 +18,7 @@ class CommentController extends AbstractController
             'comments' => $comments,
         ]);
     }
+
     #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/{id}/delete', name: 'comments_delete')]
     public function delete(int $id, CommentRepository $commentRepository, EntityManagerInterface $em): Response
     {

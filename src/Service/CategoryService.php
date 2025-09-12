@@ -20,7 +20,7 @@ class CategoryService implements CategoryServiceInterface
     public function getPostsByCategoryId(int $id): array
     {
         $category = $this->categoryRepository->find($id);
-        if (!$category instanceof \App\Entity\Category) {
+        if (!$category instanceof Category) {
             throw new NotFoundHttpException('Kategoria nie istnieje.');
         }
 

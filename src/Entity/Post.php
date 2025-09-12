@@ -52,6 +52,7 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ class Post
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -74,6 +76,7 @@ class Post
     public function setContent(string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -85,6 +88,7 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -102,6 +106,7 @@ class Post
             $this->comments[] = $comment;
             $comment->setPost($this);
         }
+
         return $this;
     }
 
@@ -110,6 +115,7 @@ class Post
         if ($this->comments->removeElement($comment) && $comment->getPost() === $this) {
             $comment->setPost(null);
         }
+
         return $this;
     }
 }

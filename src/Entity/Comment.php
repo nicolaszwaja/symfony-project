@@ -44,6 +44,7 @@ class Comment
     public function setPost(Post $post): self
     {
         $this->post = $post;
+
         return $this;
     }
 
@@ -55,6 +56,7 @@ class Comment
     public function setNickname(string $nickname): self
     {
         $this->nickname = $nickname;
+
         return $this;
     }
 
@@ -66,6 +68,7 @@ class Comment
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -77,6 +80,7 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -88,6 +92,7 @@ class Comment
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 }

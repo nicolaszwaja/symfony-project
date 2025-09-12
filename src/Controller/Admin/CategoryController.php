@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
@@ -22,6 +21,7 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/new', name: 'categories_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -45,6 +45,7 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/edit', name: 'categories_edit')]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
     {
@@ -67,6 +68,7 @@ class CategoryController extends AbstractController
             'category' => $category,
         ]);
     }
+
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/delete', name: 'categories_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
     {
