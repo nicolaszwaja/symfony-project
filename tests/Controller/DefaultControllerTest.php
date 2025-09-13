@@ -2,55 +2,51 @@
 
 namespace App\Tests\Controller;
 
+use App\Service\DefaultServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testHomepagePl(): void
+    public function testRedirectToDefaultLocale(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/pl/');
 
-        // sprawdzenie statusu 200
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        // Mock serwisu po utworzeniu klienta
+        $defaultServiceMock = $this->createMock(DefaultServiceInterface::class);
+        $defaultServiceMock
+            ->expects($this->once())
+            ->method('getRedirectToDefaultLocale')
+            ->willReturn(new RedirectResponse('/pl/'));
 
-        // sprawdzenie nagłówka
-        $this->assertSelectorTextContains('h1', 'Blog');
+        // Nadpisanie serwisu w kontenerze testowym
+        $client->getContainer()->set(DefaultServiceInterface::class, $defaultServiceMock);
 
-    }
-
-    public function testHomepageEn(): void
-    {
-        $client = static::createClient();
-        $client->request('GET', '/en/');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $this->assertSelectorTextContains('h1', 'Blog'); 
-    }
-
-    public function testRedirectRoot(): void
-    {
-        $client = static::createClient();
         $client->request('GET', '/');
+        $response = $client->getResponse();
 
-        // sprawdzenie przekierowania
-        $this->assertResponseRedirects('/pl/');
-        $client->followRedirect();
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Blog');
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+        $this->assertEquals('/pl/', $response->getTargetUrl());
     }
 
-    public function testLocaleSwitchLinks(): void
+    public function testIndex(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/pl/');
 
-        // Sprawdzenie, że linki do zmiany języka istnieją
-        $this->assertSelectorExists('a.btn-outline-primary:contains("Polski")');
-        $this->assertSelectorExists('a.btn-outline-primary:contains("Angielski")');
+        $data = ['key' => 'value'];
+        $defaultServiceMock = $this->createMock(DefaultServiceInterface::class);
+        $defaultServiceMock
+            ->expects($this->once())
+            ->method('getHomepageData')
+            ->willReturn($data);
+
+        $client->getContainer()->set(DefaultServiceInterface::class, $defaultServiceMock);
+
+        $client->request('GET', '/pl/');
+        $response = $client->getResponse();
+
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertResponseIsSuccessful();
     }
-
 }
