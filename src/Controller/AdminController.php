@@ -20,6 +20,7 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'admin_dashboard')]
     public function dashboard(Request $request): Response
     {
+        
         $section = $request->query->get('section', 'posts'); // domyślnie posty
         $page = $request->query->getInt('page', 1);
 

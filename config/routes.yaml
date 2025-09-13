@@ -5,9 +5,8 @@ controllers:
     type: attribute
 
 admin_login:
-    path: /admin/login
+    path: /login
     controller: App\Controller\SecurityController::login
 
-admin_logout:
-    path: /admin/logout
-
+app_logout:
+    path: /logout

@@ -12,32 +12,29 @@ security:
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: true
+            security: false   # dla dev toolbar i assetów
 
         main:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: admin_login    # ścieżka do formularza logowania
-                check_path: admin_login    # ścieżka obsługująca login (ten sam co login_path)
+                login_path: admin_login         # nazwa trasy w SecurityController
+                check_path: admin_login         # ta sama trasa, Symfony rozróżnia GET/POST
                 default_target_path: admin_dashboard
             logout:
-                path: admin_logout
-                target: admin_login
+                path: app_logout              # nazwa trasy w routingu
+                target: homepage
 
     access_control:
+        - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
-
+        - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

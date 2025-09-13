@@ -4,27 +4,34 @@ namespace App\Controller;
 
 use App\Service\SecurityServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    public function __construct(private readonly SecurityServiceInterface $securityService)
-    {
+    public function __construct(
+        private readonly SecurityServiceInterface $securityService
+    ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Jeśli użytkownik jest już zalogowany, przekieruj go na dashboard
+        if ($this->getUser() instanceof UserInterface) {
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
         $data = $this->securityService->getLoginData($authenticationUtils);
 
         return $this->render('security/login.html.twig', $data);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Controller can be blank: it will be intercepted by the firewall.
-        throw new \Exception('This should never be reached!');
+        throw new \LogicException('This method is intercepted by the firewall logout.');
     }
 }
