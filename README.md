@@ -5,7 +5,7 @@ Projekt bloga w Symfony.
 ## Dostęp online
 
 Aplikacja jest dostępna pod adresem:  
-[https://wierzba.wzks.uj.edu.pl/~21_szwaja/blog-app/](https://wierzba.wzks.uj.edu.pl/~21_szwaja/blog-app/)
+[https://wierzba.wzks.uj.edu.pl/~21_szwaja/blog-app/](https://wierzba.wzks.uj.edu.pl/~21_szwaja/symfony-project/)
 
 
 ## Wymagania
