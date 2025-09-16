@@ -25,7 +25,7 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Post::class)]
+    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: "comments")]
     #[ORM\JoinColumn(nullable: false)]
     private Post $post;
 
