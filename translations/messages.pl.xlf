@@ -241,6 +241,21 @@
         <source>label.select_category</source>
         <target>Wybierz kategorię</target>
       </trans-unit>
+
+      <trans-unit id="post.label.title">
+          <source>post.label.title</source>
+          <target>Tytuł</target>
+      </trans-unit>
+
+      <trans-unit id="post.label.content">
+          <source>post.label.content</source>
+          <target>Treść</target>
+      </trans-unit>
+
+      <trans-unit id="post.label.category">
+          <source>post.label.category</source>
+          <target>Kategoria</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -36,6 +36,21 @@
         <source>Komentarz nie może być pusty.</source>
         <target>Comment cannot be empty.</target>
       </trans-unit> 
+
+      <trans-unit id="comment.nickname">
+        <source>comment.nickname</source>
+        <target>Your nickname</target>
+      </trans-unit>
+
+      <trans-unit id="comment.email">
+        <source>comment.email</source>
+        <target>Your email</target>
+      </trans-unit>
+
+      <trans-unit id="comment.content">
+        <source>comment.content</source>
+        <target>Your comment</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
