@@ -8,7 +8,7 @@
    8) src/Controller/SecurityController.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation)
    9) src/Entity/Admin.php (no_superfluous_phpdoc_tags, phpdoc_trim)
   10) src/Entity/Category.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  11) src/Entity/Comment.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  11) src/Entity/Comment.php (single_quote, no_superfluous_phpdoc_tags, phpdoc_trim)
   12) src/Entity/Post.php (no_superfluous_phpdoc_tags, phpdoc_trim)
   13) src/EventSubscriber/LocaleSubscriber.php (phpdoc_annotation_without_dot)
   14) src/Form/CategoryType.php (phpdoc_annotation_without_dot)
@@ -27,121 +27,14 @@
   27) src/Service/SecurityService.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
   28) src/Service/SecurityServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
 
-Found 28 of 35 files that can be fixed in 0.862 seconds, 18.00 MB memory used
-   1) tests/Controller/AdminControllerTest.php (braces_position)
-   2) tests/Controller/CategoryControllerTest.php (trailing_comma_in_multiline)
-   3) tests/Controller/PostControllerTest.php (blank_line_before_statement)
+Found 28 of 35 files that can be fixed in 0.668 seconds, 18.00 MB memory used
+   1) tests/Controller/AdminControllerTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) tests/Controller/DummyAdminController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   3) tests/Controller/DummyCategoryController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) tests/Controller/DummyCommentController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   5) tests/Controller/DummyPostController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
 
-Found 3 of 7 files that can be fixed in 0.169 seconds, 18.00 MB memory used
-
-FILE: /workspace/symfony-project/tests/Controller/AdminControllerTest.php
-----------------------------------------------------------------------------------------------------
-FOUND 16 ERRORS AND 1 WARNING AFFECTING 11 LINES
-----------------------------------------------------------------------------------------------------
-  3 | WARNING | [ ] The license block has to be present at the top
-    |         |                     of every PHP file, before the namespace
- 11 | ERROR   | [ ] Missing doc comment for class DummyAdminController
- 13 | ERROR   | [ ] Missing doc comment for function __construct()
- 13 | ERROR   | [x] Opening brace should be on a new line
- 13 | ERROR   | [x] Closing brace must be on a line by itself
- 13 | ERROR   | [x] Closing brace must be on a line by itself
- 15 | ERROR   | [ ] Missing doc comment for function dashboard()
- 29 | ERROR   | [ ] Each class must be in a file by itself
- 29 | ERROR   | [ ] Multiple classes defined in a single file
- 29 | ERROR   | [ ] Missing doc comment for class AdminControllerTest
- 31 | ERROR   | [ ] Missing doc comment for function createControllerWithMockData()
- 43 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
- 43 | ERROR   | [ ] Missing doc comment for function testDashboardReturnsResponse()
- 55 | ERROR   | [ ] Missing doc comment for function testDashboardRendersPostsSection()
- 62 | ERROR   | [ ] Missing doc comment for function testDashboardRendersCategoriesSection()
- 69 | ERROR   | [ ] Missing doc comment for function testDashboardRendersCommentsSection()
- 76 | ERROR   | [ ] Missing doc comment for function testDashboardRendersDefaultForUnknownSection()
-----------------------------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 3 MARKED SNIFF VIOLATIONS AUTOMATICALLY
-----------------------------------------------------------------------------------------------------
-
-
-FILE: /workspace/symfony-project/tests/Controller/CategoryControllerTest.php
---------------------------------------------------------------------------------
-FOUND 9 ERRORS AND 1 WARNING AFFECTING 8 LINES
---------------------------------------------------------------------------------
-  3 | WARNING | [ ] The license block has to be present at the top
-    |         |                     of every PHP file, before the namespace
- 10 | ERROR   | [ ] Missing doc comment for class DummyCategoryController
- 14 | ERROR   | [ ] Missing doc comment for function render()
- 27 | ERROR   | [ ] Each class must be in a file by itself
- 27 | ERROR   | [ ] Multiple classes defined in a single file
- 27 | ERROR   | [ ] Missing doc comment for class CategoryControllerTest
- 29 | ERROR   | [ ] Missing doc comment for function testIndexReturnsResponse()
- 32 | ERROR   | [x] Add a comma after each item in a multi-line array
- 46 | ERROR   | [ ] Missing doc comment for function testPostsReturnsResponse()
- 51 | ERROR   | [x] Add a comma after each item in a multi-line array
---------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
---------------------------------------------------------------------------------
-
-
-FILE: /workspace/symfony-project/tests/Controller/CommentControllerTest.php
--------------------------------------------------------------------------------------
-FOUND 7 ERRORS AND 1 WARNING AFFECTING 6 LINES
--------------------------------------------------------------------------------------
-  3 | WARNING | The license block has to be present at the top
-    |         |                 of every PHP file, before the namespace
- 11 | ERROR   | Missing doc comment for class DummyCommentController
- 13 | ERROR   | Missing doc comment for function __construct()
- 17 | ERROR   | Missing doc comment for function delete()
- 27 | ERROR   | Each class must be in a file by itself
- 27 | ERROR   | Multiple classes defined in a single file
- 27 | ERROR   | Missing doc comment for class CommentControllerTest
- 29 | ERROR   | Missing doc comment for function testDeleteReturnsRedirectResponse()
--------------------------------------------------------------------------------------
-
-
-FILE: /workspace/symfony-project/tests/Controller/DefaultControllerTest.php
--------------------------------------------------------------------------------
-FOUND 3 ERRORS AND 1 WARNING AFFECTING 4 LINES
--------------------------------------------------------------------------------
-  3 | WARNING | The license block has to be present at the top
-    |         |                 of every PHP file, before the namespace
- 10 | ERROR   | Missing doc comment for class DefaultControllerTest
- 12 | ERROR   | Missing doc comment for function testRedirectToDefaultLocale()
- 33 | ERROR   | Missing doc comment for function testIndex()
--------------------------------------------------------------------------------
-
-
-FILE: /workspace/symfony-project/tests/Controller/PostControllerTest.php
----------------------------------------------------------------------------------------------
-FOUND 9 ERRORS AND 1 WARNING AFFECTING 8 LINES
----------------------------------------------------------------------------------------------
-  3 | WARNING | The license block has to be present at the top
-    |         |                 of every PHP file, before the namespace
- 12 | ERROR   | Missing doc comment for class DummyPostController
- 14 | ERROR   | Missing doc comment for function __construct()
- 18 | ERROR   | Missing doc comment for function delete()
- 25 | ERROR   | Missing doc comment for function changeCategory()
- 34 | ERROR   | Each class must be in a file by itself
- 34 | ERROR   | Multiple classes defined in a single file
- 34 | ERROR   | Missing doc comment for class PostControllerTest
- 36 | ERROR   | Missing doc comment for function testDeleteReturnsRedirectResponse()
- 51 | ERROR   | Missing doc comment for function testChangeCategoryReturnsRedirectResponse()
----------------------------------------------------------------------------------------------
-
-
-FILE: /workspace/symfony-project/tests/Service/PostServiceTest.php
-------------------------------------------------------------------------------------------
-FOUND 5 ERRORS AND 1 WARNING AFFECTING 6 LINES
-------------------------------------------------------------------------------------------
-  3 | WARNING | The license block has to be present at the top
-    |         |                 of every PHP file, before the namespace
- 14 | ERROR   | Missing doc comment for class PostServiceTest
- 21 | ERROR   | Missing doc comment for function setUp()
- 34 | ERROR   | Missing doc comment for function testGetPaginatedPostsReturnsPagination()
- 49 | ERROR   | Missing doc comment for function testGetPostByIdReturnsPost()
- 61 | ERROR   | Missing doc comment for function testGetCategoriesReturnsArray()
-------------------------------------------------------------------------------------------
-
-Time: 130ms; Memory: 8MB
-
+Found 5 of 11 files that can be fixed in 0.196 seconds, 18.00 MB memory used
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -151,7 +44,7 @@ Time: 130ms; Memory: 8MB
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250825162145
-[notice] finished in 8.2ms, used 14M memory, 1 migrations executed, 6 sql queries
+[notice] finished in 8.5ms, used 14M memory, 1 migrations executed, 6 sql queries
 
  [OK] Successfully migrated to version: DoctrineMigrations\Version20250825162145                                        
 

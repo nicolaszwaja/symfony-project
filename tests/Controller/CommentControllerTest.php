@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Tests\Controller;
 
 use App\Entity\Comment;
@@ -8,24 +17,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class DummyCommentController
-{
-    public function __construct(private readonly CommentServiceInterface $commentService)
-    {
-    }
-
-    public function delete(Comment $comment, EntityManagerInterface $em): Response
-    {
-        // Wywołanie serwisu
-        $this->commentService->deleteComment($comment, $em);
-
-        // symulacja redirectToRoute
-        return new Response('', 302);
-    }
-}
-
+/**
+ * Unit tests for CommentController.
+ */
 class CommentControllerTest extends TestCase
 {
+    /**
+     * Tests that delete action returns a redirect response.
+     */
     public function testDeleteReturnsRedirectResponse(): void
     {
         $mockService = $this->createMock(CommentServiceInterface::class);

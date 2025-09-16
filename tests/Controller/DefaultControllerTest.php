@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Tests\Controller;
 
 use App\Service\DefaultServiceInterface;
@@ -7,20 +16,24 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Unit tests for DefaultController.
+ */
 class DefaultControllerTest extends WebTestCase
 {
+    /**
+     * Tests that the root path ("/") redirects to the default locale.
+     */
     public function testRedirectToDefaultLocale(): void
     {
         $client = static::createClient();
 
-        // Mock serwisu po utworzeniu klienta
         $defaultServiceMock = $this->createMock(DefaultServiceInterface::class);
         $defaultServiceMock
             ->expects($this->once())
             ->method('getRedirectToDefaultLocale')
             ->willReturn(new RedirectResponse('/pl/'));
 
-        // Nadpisanie serwisu w kontenerze testowym
         $client->getContainer()->set(DefaultServiceInterface::class, $defaultServiceMock);
 
         $client->request('GET', '/');
@@ -30,6 +43,9 @@ class DefaultControllerTest extends WebTestCase
         $this->assertEquals('/pl/', $response->getTargetUrl());
     }
 
+    /**
+     * Tests that the index page for the default locale renders successfully.
+     */
     public function testIndex(): void
     {
         $client = static::createClient();

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Tests\Controller;
 
 use App\Entity\Post;
@@ -9,30 +18,14 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DummyPostController
-{
-    public function __construct(private readonly PostServiceInterface $postService)
-    {
-    }
-
-    public function delete(Post $post, EntityManagerInterface $em): Response
-    {
-        $this->postService->deletePost($post, $em);
-        // symulacja redirectToRoute
-        return new Response('', 302);
-    }
-
-    public function changeCategory(Request $request, Post $post, EntityManagerInterface $em): Response
-    {
-        $categoryId = $request->request->getInt('category_id');
-        $this->postService->changeCategory($post, $categoryId, $em);
-        // symulacja redirectToRoute
-        return new Response('', 302);
-    }
-}
-
+/**
+ * Unit tests for PostController.
+ */
 class PostControllerTest extends TestCase
 {
+    /**
+     * Tests that delete action returns a redirect response.
+     */
     public function testDeleteReturnsRedirectResponse(): void
     {
         $mockService = $this->createMock(PostServiceInterface::class);
@@ -48,6 +41,9 @@ class PostControllerTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
+    /**
+     * Tests that changeCategory action returns a redirect response.
+     */
     public function testChangeCategoryReturnsRedirectResponse(): void
     {
         $mockService = $this->createMock(PostServiceInterface::class);

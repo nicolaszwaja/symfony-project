@@ -1,36 +1,33 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Tests\Controller;
 
-use App\Controller\CategoryController;
 use App\Service\CategoryServiceInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class DummyCategoryController extends CategoryController
-{
-    public string $renderedContent = '';
-
-    protected function render(string $view, array $parameters = [], ?Response $response = null): Response
-    {
-        // Prosty sposób na symulację renderowania
-        $this->renderedContent = sprintf(
-            'View: %s | Data: %s',
-            $view,
-            json_encode($parameters)
-        );
-
-        return new Response($this->renderedContent, 200);
-    }
-}
-
+/**
+ * Unit tests for CategoryController.
+ */
 class CategoryControllerTest extends TestCase
 {
+    /**
+     * Tests if index action returns a valid Response.
+     */
     public function testIndexReturnsResponse(): void
     {
         $mockService = $this->createMock(CategoryServiceInterface::class);
         $mockService->method('getAllCategories')->willReturn([
-            ['id' => 1, 'name' => 'Cat1']
+            ['id' => 1, 'name' => 'Cat1'],
         ]);
 
         $controller = new DummyCategoryController($mockService);
@@ -43,13 +40,16 @@ class CategoryControllerTest extends TestCase
         $this->assertStringContainsString('category/index.html.twig', $response->getContent());
     }
 
+    /**
+     * Tests if posts action returns a valid Response.
+     */
     public function testPostsReturnsResponse(): void
     {
         $mockService = $this->createMock(CategoryServiceInterface::class);
         $mockService->method('getPostsByCategoryId')->willReturn([
             'category' => ['id' => 1, 'name' => 'Cat1'],
             'posts' => [
-                ['id' => 1, 'title' => 'Post1']
+                ['id' => 1, 'title' => 'Post1'],
             ],
         ]);
 
