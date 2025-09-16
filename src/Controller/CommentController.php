@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Comment;
@@ -10,12 +19,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller for handling adding and deleting comments.
+ */
 class CommentController extends AbstractController
 {
+    /**
+     * CommentController constructor.
+     *
+     * @param CommentServiceInterface $commentService
+     */
     public function __construct(private readonly CommentServiceInterface $commentService)
     {
     }
 
+    /**
+     * Adds a new comment to a post.
+     *
+     * @param Request                $request The HTTP request
+     * @param int                    $postId  The ID of the post
+     * @param EntityManagerInterface $em      The entity manager
+     *
+     * @return Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException When post does not exist
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/posts/{postId}/comments/add', name: 'comment_add', methods: ['POST'])]
     public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
@@ -43,6 +71,14 @@ class CommentController extends AbstractController
         ]);
     }
 
+    /**
+     * Deletes a comment.
+     *
+     * @param Comment                $comment The comment to delete
+     * @param EntityManagerInterface $em      The entity manager
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/comments/{id}/delete', name: 'comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {

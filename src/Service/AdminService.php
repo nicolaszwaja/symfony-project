@@ -1,21 +1,41 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Service;
 
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 
+/**
+ * Service providing data access for admin dashboard.
+ */
 class AdminService implements AdminServiceInterface
 {
-    public function __construct(
-        private readonly PostRepository $postRepository,
-        private readonly CategoryRepository $categoryRepository,
-        private readonly CommentRepository $commentRepository,
-    ) {
+    /**
+     * AdminService constructor.
+     *
+     * @param PostRepository     $postRepository
+     * @param CategoryRepository $categoryRepository
+     * @param CommentRepository  $commentRepository
+     */
+    public function __construct(private readonly PostRepository $postRepository, private readonly CategoryRepository $categoryRepository, private readonly CommentRepository $commentRepository)
+    {
     }
 
-    // poprzednia metoda, jeśli potrzebujesz pełnej listy
+    /**
+     * Returns dashboard data for posts, categories, and comments.
+     *
+     * @return array
+     */
     public function getDashboardData(): array
     {
         return [
@@ -25,21 +45,33 @@ class AdminService implements AdminServiceInterface
         ];
     }
 
-    // nowa metoda zwracająca QueryBuilder do paginacji postów
+    /**
+     * Returns a QueryBuilder for posts, ordered by newest first.
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function getPostsQuery()
     {
         return $this->postRepository->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC');
     }
 
-    // metoda dla kategorii
+    /**
+     * Returns a QueryBuilder for categories, ordered alphabetically.
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function getCategoriesQuery()
     {
         return $this->categoryRepository->createQueryBuilder('c')
             ->orderBy('c.name', 'ASC');
     }
 
-    // metoda dla komentarzy
+    /**
+     * Returns a QueryBuilder for comments, ordered by newest first.
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function getCommentsQuery()
     {
         return $this->commentRepository->createQueryBuilder('c')

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
@@ -10,8 +19,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller for managing categories in the admin panel.
+ */
 class CategoryController extends AbstractController
 {
+    /**
+     * Displays the list of categories.
+     *
+     * @param CategoryRepository $categoryRepository
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/', name: 'categories_list')]
     public function list(CategoryRepository $categoryRepository): Response
     {
@@ -22,6 +41,14 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Creates a new category.
+     *
+     * @param Request                $request
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/new', name: 'categories_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -40,12 +67,20 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('categories_list');
         }
 
-        // renderujemy formularz, jeśli nie jest przesłany lub jest niepoprawny
         return $this->render('admin/category/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * Edits an existing category.
+     *
+     * @param Category               $category
+     * @param Request                $request
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/edit', name: 'categories_edit')]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
     {
@@ -62,13 +97,21 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin_dashboard');
         }
 
-        // renderujemy formularz przy GET lub błędnym POST
         return $this->render('admin/category/edit.html.twig', [
             'form' => $form->createView(),
             'category' => $category,
         ]);
     }
 
+    /**
+     * Deletes a category.
+     *
+     * @param Request                $request
+     * @param Category               $category
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/delete', name: 'categories_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
     {

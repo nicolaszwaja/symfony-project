@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Controller\Admin;
 
 use App\Repository\CommentRepository;
@@ -7,8 +16,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller for managing comments in the admin panel.
+ */
 class CommentController extends AbstractController
 {
+    /**
+     * Displays the list of comments.
+     *
+     * @param CommentRepository $commentRepository
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/', name: 'comments_list')]
     public function list(CommentRepository $commentRepository): Response
     {
@@ -19,6 +38,15 @@ class CommentController extends AbstractController
         ]);
     }
 
+    /**
+     * Deletes a comment by its ID.
+     *
+     * @param int                    $id                The comment ID
+     * @param CommentRepository      $commentRepository
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/{id}/delete', name: 'comments_delete')]
     public function delete(int $id, CommentRepository $commentRepository, EntityManagerInterface $em): Response
     {

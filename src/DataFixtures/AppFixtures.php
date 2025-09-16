@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
@@ -7,8 +16,16 @@ use App\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Fixture for creating sample posts and categories.
+ */
 class AppFixtures extends Fixture
 {
+    /**
+     * Loads sample categories and posts into the database.
+     *
+     * @param ObjectManager $manager The Doctrine object manager
+     */
     public function load(ObjectManager $manager): void
     {
         // ---------------------

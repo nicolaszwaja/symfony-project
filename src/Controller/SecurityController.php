@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Controller;
 
 use App\Service\SecurityServiceInterface;
@@ -9,13 +18,27 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Controller responsible for user authentication (login and logout).
+ */
 class SecurityController extends AbstractController
 {
-    public function __construct(
-        private readonly SecurityServiceInterface $securityService
-    ) {
+    /**
+     * SecurityController constructor.
+     *
+     * @param SecurityServiceInterface $securityService The security service
+     */
+    public function __construct(private readonly SecurityServiceInterface $securityService)
+    {
     }
 
+    /**
+     * Handles the login form and authentication.
+     *
+     * @param AuthenticationUtils $authenticationUtils The authentication helper
+     *
+     * @return Response
+     */
     #[Route(path: '/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -29,6 +52,13 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', $data);
     }
 
+    /**
+     * Logout action (intercepted by Symfony firewall).
+     *
+     * @return void
+     *
+     * @throws \LogicException Always
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

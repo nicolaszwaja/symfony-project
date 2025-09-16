@@ -1,17 +1,39 @@
 <?php
 
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
+
 namespace App\Controller;
 
 use App\Service\CategoryServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller responsible for handling category-related actions.
+ */
 class CategoryController extends AbstractController
 {
+    /**
+     * CategoryController constructor.
+     *
+     * @param CategoryServiceInterface $categoryService
+     */
     public function __construct(private readonly CategoryServiceInterface $categoryService)
     {
     }
 
+    /**
+     * Displays a list of all categories.
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/categories', name: 'category_index')]
     public function index(): Response
     {
@@ -22,6 +44,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Displays posts for a given category.
+     *
+     * @param int $id The category ID
+     *
+     * @return Response
+     */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}/posts', name: 'category_posts')]
     public function posts(int $id): Response
     {
