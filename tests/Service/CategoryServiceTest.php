@@ -1,16 +1,31 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Service;
 
 use App\Entity\Category;
-use App\Entity\Post;
 use App\Repository\CategoryRepository;
 use App\Service\CategoryService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Unit tests for the CategoryService.
+ */
 class CategoryServiceTest extends TestCase
 {
+    /**
+     * Test that getAllCategories() returns an array of categories.
+     *
+     * @return void
+     */
     public function testGetAllCategoriesReturnsArray(): void
     {
         $category1 = new Category();
@@ -31,26 +46,35 @@ class CategoryServiceTest extends TestCase
         $this->assertSame($category2, $result[1]);
     }
 
+    /**
+     * Test that getPostsByCategoryId() returns the category and its posts.
+     *
+     * @return void
+     */
     public function testGetPostsByCategoryIdReturnsCategoryAndPosts(): void
-{
-    $category = new class extends \App\Entity\Category {
-        public function getPosts(): array
-        {
-            return ['Post1', 'Post2'];
-        }
-    };
+    {
+        $category = new class() extends \App\Entity\Category { // nawiasy dodane
+            /**
+             * Simulate getPosts() returning an array of posts.
+             *
+             * @return array
+             */
+            public function getPosts(): array
+            {
+                return ['Post1', 'Post2'];
+            }
+        };
 
-    $repository = $this->createMock(CategoryRepository::class);
-    $repository->method('find')->with(1)->willReturn($category);
+        $repository = $this->createMock(CategoryRepository::class);
+        $repository->method('find')->with(1)->willReturn($category);
 
-    $service = new CategoryService($repository);
+        $service = new CategoryService($repository);
 
-    $result = $service->getPostsByCategoryId(1);
+        $result = $service->getPostsByCategoryId(1);
 
-    $this->assertArrayHasKey('category', $result);
-    $this->assertArrayHasKey('posts', $result);
-    $this->assertSame($category, $result['category']);
-    $this->assertSame(['Post1', 'Post2'], $result['posts']);
-}
-
+        $this->assertArrayHasKey('category', $result);
+        $this->assertArrayHasKey('posts', $result);
+        $this->assertSame($category, $result['category']);
+        $this->assertSame(['Post1', 'Post2'], $result['posts']);
+    }
 }

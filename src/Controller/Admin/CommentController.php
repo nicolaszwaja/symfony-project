@@ -22,11 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
 class CommentController extends AbstractController
 {
     /**
-     * Displays the list of comments.
+     * Displays the list of comments in the admin panel.
      *
-     * @param CommentRepository $commentRepository
+     * @param CommentRepository $commentRepository Repository to fetch comments from the database
      *
-     * @return Response
+     * @return Response Rendered template containing the list of comments
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/', name: 'comments_list')]
     public function list(CommentRepository $commentRepository): Response
@@ -41,11 +41,11 @@ class CommentController extends AbstractController
     /**
      * Deletes a comment by its ID.
      *
-     * @param int                    $id                The comment ID
-     * @param CommentRepository      $commentRepository
-     * @param EntityManagerInterface $em
+     * @param int                    $id                The ID of the comment to delete
+     * @param CommentRepository      $commentRepository Repository to find the comment
+     * @param EntityManagerInterface $em                Entity manager to remove the comment from the database
      *
-     * @return Response
+     * @return Response Redirects to the comment list after deletion
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/comments/{id}/delete', name: 'comments_delete')]
     public function delete(int $id, CommentRepository $commentRepository, EntityManagerInterface $em): Response

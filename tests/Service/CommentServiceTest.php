@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Service;
 
@@ -9,8 +17,16 @@ use App\Service\CommentService;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Unit tests for the CommentService.
+ */
 class CommentServiceTest extends TestCase
 {
+    /**
+     * Test that getPostById() returns the correct Post entity.
+     *
+     * @return void
+     */
     public function testGetPostByIdReturnsPost(): void
     {
         $post = new Post();
@@ -24,6 +40,11 @@ class CommentServiceTest extends TestCase
         $this->assertSame($post, $service->getPostById(1));
     }
 
+    /**
+     * Test that addComment() persists and flushes the comment.
+     *
+     * @return void
+     */
     public function testAddCommentPersistsAndFlushes(): void
     {
         $comment = new Comment();
@@ -36,6 +57,11 @@ class CommentServiceTest extends TestCase
         $service->addComment($comment, $em);
     }
 
+    /**
+     * Test that deleteComment() removes and flushes the comment.
+     *
+     * @return void
+     */
     public function testDeleteCommentRemovesAndFlushes(): void
     {
         $comment = new Comment();

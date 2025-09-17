@@ -3,9 +3,9 @@
 /**
  * This file is part of the Symfony Project.
  *
- * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ * (c) Nicola Szwaja. <nicola.szwaja@student.uj.edu.pl>
  *
- * This source file is subject to the MIT license that is bundled
+ * This source file is subject to the MIT license that is bundled.
  * with this source code in the LICENSE file.
  */
 
@@ -27,9 +27,9 @@ class CategoryController extends AbstractController
     /**
      * Displays the list of categories.
      *
-     * @param CategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository Repository to fetch categories
      *
-     * @return Response
+     * @return Response The rendered template with categories
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/', name: 'categories_list')]
     public function list(CategoryRepository $categoryRepository): Response
@@ -44,10 +44,10 @@ class CategoryController extends AbstractController
     /**
      * Creates a new category.
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $em
+     * @param Request                $request HTTP request with submitted form data
+     * @param EntityManagerInterface $em      Entity manager for persisting category
      *
-     * @return Response
+     * @return Response Redirects on success or renders the form
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/new', name: 'categories_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
@@ -75,11 +75,11 @@ class CategoryController extends AbstractController
     /**
      * Edits an existing category.
      *
-     * @param Category               $category
-     * @param Request                $request
-     * @param EntityManagerInterface $em
+     * @param Category               $category The category to edit
+     * @param Request                $request  HTTP request with submitted form data
+     * @param EntityManagerInterface $em       Entity manager to flush changes
      *
-     * @return Response
+     * @return Response Redirects on success or renders the edit form
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/edit', name: 'categories_edit')]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
@@ -106,11 +106,11 @@ class CategoryController extends AbstractController
     /**
      * Deletes a category.
      *
-     * @param Request                $request
-     * @param Category               $category
-     * @param EntityManagerInterface $em
+     * @param Request                $request  HTTP request containing CSRF token
+     * @param Category               $category Category to delete
+     * @param EntityManagerInterface $em       Entity manager to remove category
      *
-     * @return Response
+     * @return Response Redirects after deletion or if token invalid
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/categories/{id}/delete', name: 'categories_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $em): Response

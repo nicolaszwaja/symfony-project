@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Entity;
 
@@ -6,8 +14,16 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Unit tests for the Comment entity.
+ */
 class CommentTest extends TestCase
 {
+    /**
+     * Tests getters and setters of the Comment entity.
+     *
+     * @return void
+     */
     public function testGettersAndSetters(): void
     {
         $comment = new Comment();

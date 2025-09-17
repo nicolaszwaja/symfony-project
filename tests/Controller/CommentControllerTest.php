@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Controller;
 
@@ -14,12 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CommentControllerTest extends TestCase
 {
-    private function createController(): DummyCommentController
-    {
-        $mockService = $this->createMock(CommentServiceInterface::class);
-        return new DummyCommentController($mockService);
-    }
-
+    /**
+     * Test that delete() returns a Response containing a redirect.
+     *
+     * @return void
+     */
     public function testDeleteReturnsRedirectResponse(): void
     {
         $mockService = $this->createMock(CommentServiceInterface::class);
@@ -35,6 +42,11 @@ class CommentControllerTest extends TestCase
         $this->assertStringContainsString('redirect', $response->getContent());
     }
 
+    /**
+     * Test that add() with valid form data persists and redirects.
+     *
+     * @return void
+     */
     public function testAddWithValidForm(): void
     {
         $mockEm = $this->createMock(EntityManagerInterface::class);
@@ -45,18 +57,37 @@ class CommentControllerTest extends TestCase
         $controller = $this->createController();
 
         $response = $controller->add($request, 1, $mockEm);
+
         $this->assertInstanceOf(Response::class, $response);
         $this->assertStringContainsString('redirect', $response->getContent());
     }
 
+    /**
+     * Test that add() with invalid form data renders the add template.
+     *
+     * @return void
+     */
     public function testAddWithInvalidForm(): void
     {
         $mockEm = $this->createMock(EntityManagerInterface::class);
-        $request = new Request(); // brak danych -> forma niepoprawna
+        $request = new Request(); // no data -> invalid form
         $controller = $this->createController();
 
         $response = $controller->add($request, 1, $mockEm);
+
         $this->assertInstanceOf(Response::class, $response);
         $this->assertStringContainsString('render', $response->getContent());
+    }
+
+    /**
+     * Creates DummyCommentController with a mock service.
+     *
+     * @return DummyCommentController
+     */
+    private function createController(): DummyCommentController
+    {
+        $mockService = $this->createMock(CommentServiceInterface::class);
+
+        return new DummyCommentController($mockService);
     }
 }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Service;
 
@@ -7,8 +15,16 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Unit tests for the SecurityService.
+ */
 class SecurityServiceTest extends TestCase
 {
+    /**
+     * Test that getLoginData() returns an array with last username and error.
+     *
+     * @return void
+     */
     public function testGetLoginDataReturnsCorrectArray(): void
     {
         $authenticationException = new AuthenticationException('Some error');

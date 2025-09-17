@@ -1,20 +1,35 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Service;
 
 use App\Entity\Category;
 use App\Entity\Post;
-use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\PostRepository;
 use App\Service\PostService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Unit tests for the PostService.
+ */
 class PostServiceTest extends TestCase
 {
+    /**
+     * Test that getPostById() returns the correct Post entity.
+     *
+     * @return void
+     */
     public function testGetPostByIdReturnsPost(): void
     {
         $post = new Post();
@@ -32,6 +47,11 @@ class PostServiceTest extends TestCase
         $this->assertSame($post, $service->getPostById(1));
     }
 
+    /**
+     * Test that savePost() persists and flushes the Post entity.
+     *
+     * @return void
+     */
     public function testSavePostPersistsAndFlushes(): void
     {
         $post = new Post();
@@ -50,6 +70,11 @@ class PostServiceTest extends TestCase
         $service->savePost($post, $em);
     }
 
+    /**
+     * Test that deletePost() removes and flushes the Post entity.
+     *
+     * @return void
+     */
     public function testDeletePostRemovesAndFlushes(): void
     {
         $post = new Post();
@@ -68,6 +93,11 @@ class PostServiceTest extends TestCase
         $service->deletePost($post, $em);
     }
 
+    /**
+     * Test that changeCategory() with a valid category sets the category on the post.
+     *
+     * @return void
+     */
     public function testChangeCategoryWithValidCategorySetsCategory(): void
     {
         $post = new Post();
@@ -93,6 +123,11 @@ class PostServiceTest extends TestCase
         $this->assertSame($category, $post->getCategory());
     }
 
+    /**
+     * Test that getCategories() returns all categories as an array.
+     *
+     * @return void
+     */
     public function testGetCategoriesReturnsArray(): void
     {
         $category1 = new Category();

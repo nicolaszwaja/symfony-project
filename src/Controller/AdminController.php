@@ -26,24 +26,26 @@ class AdminController extends AbstractController
     /**
      * AdminController constructor.
      *
-     * @param AdminServiceInterface $adminService The admin service
-     * @param PaginatorInterface    $paginator    The paginator service
+     * @param AdminServiceInterface $adminService The admin service used to fetch admin data
+     * @param PaginatorInterface    $paginator    The paginator service to paginate results
      */
-    public function __construct(private readonly AdminServiceInterface $adminService, private readonly PaginatorInterface $paginator)
-    {
+    public function __construct(
+        private readonly AdminServiceInterface $adminService,
+        private readonly PaginatorInterface $paginator,
+    ) {
     }
 
     /**
      * Displays the admin dashboard with paginated sections.
      *
-     * @param Request $request The HTTP request
+     * @param Request $request The HTTP request containing query parameters
      *
-     * @return Response
+     * @return Response The rendered dashboard page with pagination
      */
     #[Route('/admin', name: 'admin_dashboard')]
     public function dashboard(Request $request): Response
     {
-        $section = $request->query->get('section', 'posts'); // domyślnie posty
+        $section = $request->query->get('section', 'posts');
         $page = $request->query->getInt('page', 1);
 
         $query = match ($section) {

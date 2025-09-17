@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Controller;
 
@@ -13,24 +21,49 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DummyCommentController
 {
-    public function __construct(private CommentServiceInterface $service) {}
+    /**
+     * DummyCommentController constructor.
+     *
+     * @param CommentServiceInterface $service
+     */
+    public function __construct(private CommentServiceInterface $service)
+    {
+    }
 
+    /**
+     * Handles adding a comment to a post.
+     *
+     * @param Request                $request
+     * @param int                    $postId
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
-        // Symulacja formularza
-        if ($request->request->count() > 0) {
+        if (0 < $request->request->count()) {
             $comment = new Comment();
             $em->persist($comment);
             $em->flush();
+
             return new Response("redirect to post_show with id $postId");
         }
 
         return new Response("render post/show.html.twig with form");
     }
 
+    /**
+     * Handles deleting a comment.
+     *
+     * @param Comment                $comment
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {
         $this->service->deleteComment($comment, $em);
+
         return new Response('redirect to admin_dashboard');
     }
 }

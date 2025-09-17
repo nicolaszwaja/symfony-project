@@ -1,40 +1,59 @@
-   1) src/Controller/Admin/CategoryController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   2) src/Controller/Admin/CommentController.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_align)
-   3) src/Controller/AdminController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   4) src/Controller/CategoryController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   5) src/Controller/CommentController.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
-   6) src/Controller/DefaultController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   7) src/Controller/PostController.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
-   8) src/Controller/SecurityController.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation)
-   9) src/Entity/Admin.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  10) src/Entity/Category.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  11) src/Entity/Comment.php (single_quote, no_superfluous_phpdoc_tags, phpdoc_trim)
-  12) src/Entity/Post.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  13) src/EventSubscriber/LocaleSubscriber.php (phpdoc_annotation_without_dot)
-  14) src/Form/CategoryType.php (phpdoc_annotation_without_dot)
-  15) src/Repository/AdminRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  16) src/Repository/CategoryRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  17) src/Repository/CommentRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  18) src/Repository/PostRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  19) src/Service/AdminService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  20) src/Service/CategoryService.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation)
-  21) src/Service/CommentService.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_align)
-  22) src/Service/CommentServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_align)
-  23) src/Service/DefaultService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  24) src/Service/DefaultServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  25) src/Service/PostService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  26) src/Service/PostServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-  27) src/Service/SecurityService.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
-  28) src/Service/SecurityServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
+   1) src/Controller/CategoryController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) src/Controller/CommentController.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   3) src/Controller/DefaultController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) src/Controller/PostController.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   5) src/Controller/SecurityController.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation)
+   6) src/Entity/Admin.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   7) src/Entity/Category.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   8) src/Entity/Comment.php (single_quote, no_superfluous_phpdoc_tags, phpdoc_trim)
+   9) src/Entity/Post.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  10) src/EventSubscriber/LocaleSubscriber.php (phpdoc_annotation_without_dot)
+  11) src/Form/CategoryType.php (phpdoc_annotation_without_dot)
+  12) src/Repository/AdminRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  13) src/Repository/CategoryRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  14) src/Repository/CommentRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  15) src/Repository/PostRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  16) src/Service/AdminService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  17) src/Service/CategoryService.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation)
+  18) src/Service/CommentService.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_align)
+  19) src/Service/CommentServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_align)
+  20) src/Service/DefaultService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  21) src/Service/DefaultServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  22) src/Service/PostService.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  23) src/Service/PostServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  24) src/Service/SecurityService.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
+  25) src/Service/SecurityServiceInterface.php (no_superfluous_phpdoc_tags, phpdoc_trim_consecutive_blank_line_separation)
 
-Found 28 of 35 files that can be fixed in 0.668 seconds, 18.00 MB memory used
-   1) tests/Controller/AdminControllerTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   2) tests/Controller/DummyAdminController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   3) tests/Controller/DummyCategoryController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   4) tests/Controller/DummyCommentController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   5) tests/Controller/DummyPostController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+Found 25 of 35 files that can be fixed in 0.573 seconds, 18.00 MB memory used
+   1) tests/Controller/CategoryControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   2) tests/Controller/CommentControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   3) tests/Controller/DummyAdminController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) tests/Controller/DummyCategoryController.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim, no_unused_imports)
+   5) tests/Controller/DummyCommentController.php (single_quote, no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   6) tests/Controller/DummyPostController.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   7) tests/Controller/PostControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   8) tests/Entity/AdminTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   9) tests/Entity/CategoryTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+  10) tests/Entity/CommentTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+  11) tests/Entity/PostTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+  12) tests/Form/PostTypeTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+  13) tests/Service/CategoryServiceTest.php (class_attributes_separation, class_definition, fully_qualified_strict_types, no_superfluous_phpdoc_tags, blank_line_after_opening_tag, statement_indentation, phpdoc_trim, no_unused_imports)
+  14) tests/Service/CommentServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+  15) tests/Service/PostServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim, no_unused_imports)
+  16) tests/Service/SecurityServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
 
-Found 5 of 11 files that can be fixed in 0.196 seconds, 18.00 MB memory used
+Found 16 of 18 files that can be fixed in 0.380 seconds, 18.00 MB memory used
+
+FILE: /workspace/symfony-project/src/Controller/AdminController.php
+-------------------------------------------------------------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+-------------------------------------------------------------------------------------------------------------------------
+ 32 | ERROR | Declare all the arguments on the same line as the method/function name, no matter how many arguments there
+    |       | are.
+-------------------------------------------------------------------------------------------------------------------------
+
+Time: 211ms; Memory: 8MB
+
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -44,7 +63,7 @@ Found 5 of 11 files that can be fixed in 0.196 seconds, 18.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250825162145
-[notice] finished in 8.5ms, used 14M memory, 1 migrations executed, 6 sql queries
+[notice] finished in 5.8ms, used 14M memory, 1 migrations executed, 6 sql queries
 
  [OK] Successfully migrated to version: DoctrineMigrations\Version20250825162145                                        
 

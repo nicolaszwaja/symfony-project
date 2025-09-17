@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Controller;
 
@@ -6,8 +14,16 @@ use App\Service\PostServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Functional tests for PostController.
+ */
 class PostControllerTest extends WebTestCase
 {
+    /**
+     * Test that the /posts route returns a successful HTML response.
+     *
+     * @return void
+     */
     public function testListReturnsResponse(): void
     {
         $client = static::createClient();

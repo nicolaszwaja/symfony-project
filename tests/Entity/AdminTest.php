@@ -1,12 +1,28 @@
 <?php
+/**
+ * This file is part of the Symfony Project.
+ *
+ * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the LICENSE file.
+ */
 
 namespace App\Tests\Entity;
 
 use App\Entity\Admin;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Unit tests for the Admin entity.
+ */
 class AdminTest extends TestCase
 {
+    /**
+     * Tests all getters and setters of the Admin entity.
+     *
+     * @return void
+     */
     public function testGettersAndSetters(): void
     {
         $admin = new Admin();
@@ -29,6 +45,6 @@ class AdminTest extends TestCase
 
         // Test eraseCredentials (should not throw)
         $admin->eraseCredentials();
-        $this->assertTrue(true); // Po prostu upewniamy się, że metoda istnieje
+        $this->assertTrue(true); // Ensure the method exists
     }
 }
