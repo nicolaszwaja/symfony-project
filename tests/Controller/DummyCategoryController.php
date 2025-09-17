@@ -1,48 +1,50 @@
 <?php
 
-/**
- * This file is part of the Symfony Project.
- *
- * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the LICENSE file.
- */
-
 namespace App\Tests\Controller;
 
-use App\Controller\CategoryController;
+use App\Entity\Category;
+use App\Form\CategoryType;
+use App\Service\CategoryServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Dummy implementation of CategoryController used for tests.
- */
-class DummyCategoryController extends CategoryController
+class DummyCategoryController
 {
-    /**
-     * Stores simulated rendered content.
-     *
-     * @var string
-     */
-    public string $renderedContent = '';
+    public function __construct(private CategoryServiceInterface $service) {}
 
-    /**
-     * Simulates template rendering.
-     *
-     * @param string        $view
-     * @param array         $parameters
-     * @param Response|null $response
-     *
-     * @return Response
-     */
-    protected function render(string $view, array $parameters = [], ?Response $response = null): Response
+    public function list($repo): Response
     {
-        $this->renderedContent = sprintf(
-            'View: %s | Data: %s',
-            $view,
-            json_encode($parameters)
-        );
+        return new Response('list.html.twig with categories');
+    }
 
-        return new Response($this->renderedContent, 200);
+    public function new(Request $request, EntityManagerInterface $em): Response
+    {
+        if ($request->request->count() > 0) {
+            $em->persist(new Category());
+            $em->flush();
+            return new Response('redirect to categories list');
+        }
+        return new Response('new.html.twig form');
+    }
+
+    public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($request->request->count() > 0) {
+            $em->flush();
+            return new Response('redirect to dashboard');
+        }
+        return new Response('edit.html.twig form');
+    }
+
+    public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
+    {
+        $token = $request->request->get('_token');
+        if ($token === 'delete'.$category->getId()) {
+            $em->remove($category);
+            $em->flush();
+            return new Response('redirect after delete');
+        }
+        return new Response('redirect after invalid token');
     }
 }

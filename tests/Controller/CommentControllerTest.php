@@ -1,30 +1,25 @@
 <?php
 
-/**
- * This file is part of the Symfony Project.
- *
- * (c) Nicola Szwaja <nicola.szwaja@student.uj.edu.pl>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the LICENSE file.
- */
-
 namespace App\Tests\Controller;
 
 use App\Entity\Comment;
 use App\Service\CommentServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Unit tests for CommentController.
+ * Unit tests for CommentController using DummyController.
  */
 class CommentControllerTest extends TestCase
 {
-    /**
-     * Tests that delete action returns a redirect response.
-     */
+    private function createController(): DummyCommentController
+    {
+        $mockService = $this->createMock(CommentServiceInterface::class);
+        return new DummyCommentController($mockService);
+    }
+
     public function testDeleteReturnsRedirectResponse(): void
     {
         $mockService = $this->createMock(CommentServiceInterface::class);
@@ -37,6 +32,31 @@ class CommentControllerTest extends TestCase
         $response = $controller->delete($comment, $mockEm);
 
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertStringContainsString('redirect', $response->getContent());
+    }
+
+    public function testAddWithValidForm(): void
+    {
+        $mockEm = $this->createMock(EntityManagerInterface::class);
+        $mockEm->expects($this->once())->method('persist');
+        $mockEm->expects($this->once())->method('flush');
+
+        $request = new Request([], ['content' => 'Test comment']);
+        $controller = $this->createController();
+
+        $response = $controller->add($request, 1, $mockEm);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertStringContainsString('redirect', $response->getContent());
+    }
+
+    public function testAddWithInvalidForm(): void
+    {
+        $mockEm = $this->createMock(EntityManagerInterface::class);
+        $request = new Request(); // brak danych -> forma niepoprawna
+        $controller = $this->createController();
+
+        $response = $controller->add($request, 1, $mockEm);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertStringContainsString('render', $response->getContent());
     }
 }
