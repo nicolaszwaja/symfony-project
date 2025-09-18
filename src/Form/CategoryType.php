@@ -25,8 +25,8 @@ class CategoryType extends AbstractType
     /**
      * Builds the form for the Category entity.
      *
-     * @param FormBuilderInterface $builder The form builder.
-     * @param array<string, mixed> $options Options for this form.
+     * @param FormBuilderInterface $builder The form builder
+     * @param array<string, mixed> $options Options for this form
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -39,7 +39,7 @@ class CategoryType extends AbstractType
     /**
      * Configures the options for this form type.
      *
-     * @param OptionsResolver $resolver The options resolver.
+     * @param OptionsResolver $resolver The options resolver
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

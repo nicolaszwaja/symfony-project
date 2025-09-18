@@ -16,32 +16,34 @@ use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Interface for managing comments on posts.
+ * Interface defining methods for managing comments on posts.
+ *
+ * Provides operations to add, delete comments and retrieve posts by ID.
  */
 interface CommentServiceInterface
 {
     /**
-     * Add a comment to a post.
+     * Adds a comment to a post.
      *
-     * @param Comment                $comment The comment to add
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment The Comment entity to persist
+     * @param EntityManagerInterface $em      The entity manager used for persistence
      */
     public function addComment(Comment $comment, EntityManagerInterface $em): void;
 
     /**
-     * Delete a comment.
+     * Deletes a comment from the database.
      *
-     * @param Comment                $comment The comment to delete
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment The Comment entity to remove
+     * @param EntityManagerInterface $em      The entity manager used for deletion
      */
     public function deleteComment(Comment $comment, EntityManagerInterface $em): void;
 
     /**
-     * Find a post by its ID.
+     * Retrieves a post by its ID.
      *
-     * @param int $id The ID of the post
+     * @param int $id The ID of the post to retrieve
      *
-     * @return Post|null
+     * @return Post|null The Post entity if found, or null if no post exists with the given ID
      */
     public function getPostById(int $id): ?Post;
 }

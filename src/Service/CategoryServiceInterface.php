@@ -15,22 +15,24 @@ use App\Entity\Category;
 
 /**
  * Interface for CategoryService.
+ *
+ * Provides methods to retrieve all categories and posts within a specific category.
  */
 interface CategoryServiceInterface
 {
     /**
-     * Get all categories.
+     * Retrieves all categories.
      *
-     * @return Category[]
+     * @return Category[] Array of Category entities
      */
     public function getAllCategories(): array;
 
     /**
-     * Get posts of a category by ID.
+     * Retrieves a category by ID along with its associated posts.
      *
-     * @param int $id The ID of the category
+     * @param int $id The ID of the category to retrieve
      *
-     * @return array{category: Category, posts: array}
+     * @return array{category: Category, posts: array} Array containing the Category entity and its posts
      */
     public function getPostsByCategoryId(int $id): array;
 }

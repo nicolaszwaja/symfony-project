@@ -23,16 +23,16 @@ class DefaultController extends AbstractController
     /**
      * DefaultController constructor.
      *
-     * @param DefaultServiceInterface $defaultService
+     * @param DefaultServiceInterface $defaultService The service responsible for homepage and locale logic
      */
     public function __construct(private readonly DefaultServiceInterface $defaultService)
     {
     }
 
     /**
-     * Redirects to the default locale homepage.
+     * Redirects the user to the homepage in the default locale.
      *
-     * @return Response
+     * @return Response A redirect response to the localized homepage
      */
     #[\Symfony\Component\Routing\Attribute\Route('/', name: 'homepage_redirect')]
     public function redirectToDefaultLocale(): Response
@@ -41,9 +41,9 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Displays the homepage for a given locale.
+     * Displays the homepage for the current locale.
      *
-     * @return Response
+     * @return Response The rendered homepage view
      */
     #[\Symfony\Component\Routing\Attribute\Route('/{_locale}/', name: 'homepage', requirements: ['_locale' => 'pl|en'])]
     public function index(): Response

@@ -19,7 +19,10 @@ interface AdminServiceInterface
     /**
      * Get all data for the admin dashboard.
      *
-     * @return array<string, array<int, object>> Array containing 'posts', 'categories', and 'comments'
+     * @return array<string, array<int, object>> Array containing:
+     *                                           - 'posts': array of Post objects
+     *                                           - 'categories': array of Category objects
+     *                                           - 'comments': array of Comment objects
      */
     public function getDashboardData(): array;
 }

@@ -25,7 +25,7 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: "comments")]
+    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private Post $post;
 
@@ -46,7 +46,7 @@ class Comment
     /**
      * Returns the ID of the comment.
      *
-     * @return int|null
+     * @return int|null The unique identifier or null if not persisted
      */
     public function getId(): ?int
     {
@@ -56,7 +56,7 @@ class Comment
     /**
      * Returns the post associated with the comment.
      *
-     * @return Post
+     * @return Post The post to which this comment belongs
      */
     public function getPost(): Post
     {
@@ -66,9 +66,9 @@ class Comment
     /**
      * Sets the post associated with the comment.
      *
-     * @param Post $post
+     * @param Post $post The related post entity
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setPost(Post $post): self
     {
@@ -80,7 +80,7 @@ class Comment
     /**
      * Returns the nickname of the commenter.
      *
-     * @return string
+     * @return string The display name of the author
      */
     public function getNickname(): string
     {
@@ -90,9 +90,9 @@ class Comment
     /**
      * Sets the nickname of the commenter.
      *
-     * @param string $nickname
+     * @param string $nickname The display name chosen by the user
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setNickname(string $nickname): self
     {
@@ -104,7 +104,7 @@ class Comment
     /**
      * Returns the email of the commenter.
      *
-     * @return string
+     * @return string The email address of the author
      */
     public function getEmail(): string
     {
@@ -114,9 +114,9 @@ class Comment
     /**
      * Sets the email of the commenter.
      *
-     * @param string $email
+     * @param string $email The email address provided by the user
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setEmail(string $email): self
     {
@@ -128,7 +128,7 @@ class Comment
     /**
      * Returns the content of the comment.
      *
-     * @return string
+     * @return string The text body of the comment
      */
     public function getContent(): string
     {
@@ -138,9 +138,9 @@ class Comment
     /**
      * Sets the content of the comment.
      *
-     * @param string $content
+     * @param string $content The text body provided by the author
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setContent(string $content): self
     {
@@ -152,7 +152,7 @@ class Comment
     /**
      * Returns the creation date of the comment.
      *
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable The timestamp when the comment was created
      */
     public function getCreatedAt(): \DateTimeImmutable
     {
@@ -162,9 +162,9 @@ class Comment
     /**
      * Sets the creation date of the comment.
      *
-     * @param \DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt The timestamp of comment creation
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {

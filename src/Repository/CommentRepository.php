@@ -25,7 +25,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * CommentRepository constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry The manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,7 +33,10 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Comment[] Returns an array of Comment objects
+    //  * Finds comments by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search for
+    //  * @return Comment[] Returns an array of Comment objects matching the criteria
     //  */
     // public function findByExampleField($value): array
     // {
@@ -46,6 +49,12 @@ class CommentRepository extends ServiceEntityRepository
     //         ->getResult();
     // }
 
+    // /**
+    //  * Finds a single comment by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search by
+    //  * @return Comment|null Returns a single Comment object or null if none found
+    //  */
     // public function findOneBySomeField($value): ?Comment
     // {
     //     return $this->createQueryBuilder('c')

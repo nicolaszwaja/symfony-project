@@ -25,7 +25,7 @@ class PostRepository extends ServiceEntityRepository
     /**
      * PostRepository constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry The Doctrine manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,7 +35,7 @@ class PostRepository extends ServiceEntityRepository
     /**
      * Finds all posts sorted by newest first.
      *
-     * @return Post[]
+     * @return Post[] Returns an array of Post objects sorted by creation date descending
      */
     public function findAllSortedByNewest(): array
     {
@@ -46,7 +46,10 @@ class PostRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Post[] Returns an array of Post objects
+    //  * Finds posts by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search for
+    //  * @return Post[] Returns an array of Post objects matching the criteria
     //  */
     // public function findByExampleField($value): array
     // {
@@ -59,6 +62,12 @@ class PostRepository extends ServiceEntityRepository
     //         ->getResult();
     // }
 
+    // /**
+    //  * Finds a single post by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search by
+    //  * @return Post|null Returns a single Post object or null if none found
+    //  */
     // public function findOneBySomeField($value): ?Post
     // {
     //     return $this->createQueryBuilder('p')

@@ -23,9 +23,9 @@ class AdminService implements AdminServiceInterface
     /**
      * AdminService constructor.
      *
-     * @param PostRepository     $postRepository
-     * @param CategoryRepository $categoryRepository
-     * @param CommentRepository  $commentRepository
+     * @param PostRepository     $postRepository     Repository for accessing posts
+     * @param CategoryRepository $categoryRepository Repository for accessing categories
+     * @param CommentRepository  $commentRepository  Repository for accessing comments
      */
     public function __construct(private readonly PostRepository $postRepository, private readonly CategoryRepository $categoryRepository, private readonly CommentRepository $commentRepository)
     {
@@ -34,7 +34,7 @@ class AdminService implements AdminServiceInterface
     /**
      * Returns dashboard data for posts, categories, and comments.
      *
-     * @return array
+     * @return array<string, array> An associative array containing lists of posts, categories, and comments
      */
     public function getDashboardData(): array
     {
@@ -48,7 +48,7 @@ class AdminService implements AdminServiceInterface
     /**
      * Returns a QueryBuilder for posts, ordered by newest first.
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder A QueryBuilder object for posts
      */
     public function getPostsQuery()
     {
@@ -59,7 +59,7 @@ class AdminService implements AdminServiceInterface
     /**
      * Returns a QueryBuilder for categories, ordered alphabetically.
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder A QueryBuilder object for categories
      */
     public function getCategoriesQuery()
     {
@@ -70,7 +70,7 @@ class AdminService implements AdminServiceInterface
     /**
      * Returns a QueryBuilder for comments, ordered by newest first.
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder A QueryBuilder object for comments
      */
     public function getCommentsQuery()
     {

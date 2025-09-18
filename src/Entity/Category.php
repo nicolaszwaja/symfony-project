@@ -39,7 +39,7 @@ class Category
     /**
      * Returns the ID of the category.
      *
-     * @return int|null
+     * @return int|null The unique identifier or null if not persisted
      */
     public function getId(): ?int
     {
@@ -49,7 +49,7 @@ class Category
     /**
      * Returns the name of the category.
      *
-     * @return string|null
+     * @return string|null The category name or null if not set
      */
     public function getName(): ?string
     {
@@ -59,9 +59,9 @@ class Category
     /**
      * Sets the name of the category.
      *
-     * @param string $name
+     * @param string $name The new name of the category
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setName(string $name): self
     {

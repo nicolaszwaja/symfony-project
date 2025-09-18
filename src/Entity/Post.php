@@ -47,7 +47,7 @@ class Post
     private Collection $comments;
 
     /**
-     * Post constructor.
+     * Initializes the comments collection.
      */
     public function __construct()
     {
@@ -57,7 +57,7 @@ class Post
     /**
      * Returns the post ID.
      *
-     * @return int|null
+     * @return int|null The unique identifier or null if not persisted
      */
     public function getId(): ?int
     {
@@ -67,7 +67,7 @@ class Post
     /**
      * Returns the category of the post.
      *
-     * @return Category
+     * @return Category The category entity assigned to this post
      */
     public function getCategory(): Category
     {
@@ -77,9 +77,9 @@ class Post
     /**
      * Sets the category of the post.
      *
-     * @param Category $category
+     * @param Category $category The category entity to assign
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setCategory(Category $category): self
     {
@@ -91,7 +91,7 @@ class Post
     /**
      * Returns the title of the post.
      *
-     * @return string
+     * @return string The title text
      */
     public function getTitle(): string
     {
@@ -101,9 +101,9 @@ class Post
     /**
      * Sets the title of the post.
      *
-     * @param string $title
+     * @param string $title The title text
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setTitle(string $title): self
     {
@@ -115,7 +115,7 @@ class Post
     /**
      * Returns the content of the post.
      *
-     * @return string
+     * @return string The main body text
      */
     public function getContent(): string
     {
@@ -125,9 +125,9 @@ class Post
     /**
      * Sets the content of the post.
      *
-     * @param string $content
+     * @param string $content The main body text
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setContent(string $content): self
     {
@@ -139,7 +139,7 @@ class Post
     /**
      * Returns the creation date of the post.
      *
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable The timestamp when the post was created
      */
     public function getCreatedAt(): \DateTimeImmutable
     {
@@ -149,9 +149,9 @@ class Post
     /**
      * Sets the creation date of the post.
      *
-     * @param \DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt The timestamp of creation
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
@@ -163,7 +163,7 @@ class Post
     /**
      * Returns the comments for the post.
      *
-     * @return Collection|Comment[]
+     * @return Collection<int, Comment> A collection of related comments
      */
     public function getComments(): Collection
     {
@@ -173,9 +173,9 @@ class Post
     /**
      * Adds a comment to the post.
      *
-     * @param Comment $comment
+     * @param Comment $comment The comment to attach
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function addComment(Comment $comment): self
     {
@@ -190,9 +190,9 @@ class Post
     /**
      * Removes a comment from the post.
      *
-     * @param Comment $comment
+     * @param Comment $comment The comment to detach
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function removeComment(Comment $comment): self
     {

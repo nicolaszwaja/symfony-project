@@ -26,18 +26,18 @@ class SecurityController extends AbstractController
     /**
      * SecurityController constructor.
      *
-     * @param SecurityServiceInterface $securityService The security service
+     * @param SecurityServiceInterface $securityService Service responsible for security-related logic
      */
     public function __construct(private readonly SecurityServiceInterface $securityService)
     {
     }
 
     /**
-     * Handles the login form and authentication.
+     * Handles the login form and user authentication.
      *
-     * @param AuthenticationUtils $authenticationUtils The authentication helper
+     * @param AuthenticationUtils $authenticationUtils Helper providing authentication errors and last username
      *
-     * @return Response
+     * @return Response The rendered login page or a redirect to the dashboard if already authenticated
      */
     #[Route(path: '/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -55,9 +55,9 @@ class SecurityController extends AbstractController
     /**
      * Logout action (intercepted by Symfony firewall).
      *
-     * @return void
+     * @return void This method never returns because it is intercepted
      *
-     * @throws \LogicException Always
+     * @throws \LogicException Always thrown to indicate interception by firewall
      */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void

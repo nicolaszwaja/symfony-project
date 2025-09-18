@@ -23,7 +23,7 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository Repository for Category entities
      */
     public function __construct(private readonly CategoryRepository $categoryRepository)
     {
@@ -32,7 +32,7 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Returns all categories.
      *
-     * @return Category[]
+     * @return Category[] Array of all Category entities
      */
     public function getAllCategories(): array
     {
@@ -40,13 +40,13 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-     * Returns a category and its posts by category ID.
+     * Returns a category and its associated posts by category ID.
      *
-     * @param int $id
+     * @param int $id The ID of the category
      *
-     * @return array{category: Category, posts: iterable}
+     * @return array{category: Category, posts: iterable} Array containing the Category entity and its posts
      *
-     * @throws NotFoundHttpException When the category does not exist
+     * @throws NotFoundHttpException When the category with the given ID does not exist
      */
     public function getPostsByCategoryId(int $id): array
     {

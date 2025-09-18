@@ -38,7 +38,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Returns the unique identifier of the admin.
      *
-     * @return int|null
+     * @return int|null The admin ID or null if not persisted
      */
     public function getId(): ?int
     {
@@ -48,7 +48,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Returns the username.
      *
-     * @return string
+     * @return string The admin username
      */
     public function getUsername(): string
     {
@@ -58,9 +58,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Sets the username.
      *
-     * @param string $username
+     * @param string $username The new username for the admin
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setUsername(string $username): self
     {
@@ -72,7 +72,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Returns the roles granted to the admin.
      *
-     * @return array
+     * @return array List of roles
      */
     public function getRoles(): array
     {
@@ -82,9 +82,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Sets roles for the admin.
      *
-     * @param array $roles
+     * @param array $roles Array of roles to assign
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setRoles(array $roles): self
     {
@@ -96,7 +96,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Returns the hashed password.
      *
-     * @return string
+     * @return string The hashed password
      */
     public function getPassword(): string
     {
@@ -106,9 +106,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Sets the hashed password.
      *
-     * @param string $password
+     * @param string $password The hashed password to store
      *
-     * @return self
+     * @return self Fluent interface
      */
     public function setPassword(string $password): self
     {
@@ -120,7 +120,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Returns the identifier for this user (used by Symfony security).
      *
-     * @return string
+     * @return string The username identifier
      */
     public function getUserIdentifier(): string
     {
@@ -129,6 +129,8 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Removes any sensitive temporary data from the user.
+     *
+     * Example: clear plain-text passwords
      */
     public function eraseCredentials(): void
     {

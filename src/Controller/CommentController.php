@@ -27,22 +27,22 @@ class CommentController extends AbstractController
     /**
      * CommentController constructor.
      *
-     * @param CommentServiceInterface $commentService
+     * @param CommentServiceInterface $commentService The service handling comment-related business logic
      */
     public function __construct(private readonly CommentServiceInterface $commentService)
     {
     }
 
     /**
-     * Adds a new comment to a post.
+     * Adds a new comment to a specific post.
      *
-     * @param Request                $request The HTTP request
-     * @param int                    $postId  The ID of the post
-     * @param EntityManagerInterface $em      The entity manager
+     * @param Request                $request The HTTP request containing comment data
+     * @param int                    $postId  The unique ID of the post
+     * @param EntityManagerInterface $em      The entity manager responsible for persistence
      *
-     * @return Response
+     * @return Response The rendered view or a redirect to the post page
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException When post does not exist
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException When the post does not exist
      */
     #[\Symfony\Component\Routing\Attribute\Route('/posts/{postId}/comments/add', name: 'comment_add', methods: ['POST'])]
     public function add(Request $request, int $postId, EntityManagerInterface $em): Response
@@ -72,12 +72,12 @@ class CommentController extends AbstractController
     }
 
     /**
-     * Deletes a comment.
+     * Deletes a comment from the system.
      *
-     * @param Comment                $comment The comment to delete
-     * @param EntityManagerInterface $em      The entity manager
+     * @param Comment                $comment The comment entity to remove
+     * @param EntityManagerInterface $em      The entity manager handling the deletion
      *
-     * @return Response
+     * @return Response Redirects to the admin dashboard after deletion
      */
     #[\Symfony\Component\Routing\Attribute\Route('/comments/{id}/delete', name: 'comment_delete', methods: ['POST'])]
     public function delete(Comment $comment, EntityManagerInterface $em): Response

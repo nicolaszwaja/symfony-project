@@ -16,22 +16,24 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Service providing default behavior and data for the application.
+ *
+ * Handles redirects to default locale and provides data for the homepage template.
  */
 class DefaultService implements DefaultServiceInterface
 {
     /**
      * DefaultService constructor.
      *
-     * @param RouterInterface $router The router service
+     * @param RouterInterface $router The router service used for generating URLs
      */
     public function __construct(private readonly RouterInterface $router)
     {
     }
 
     /**
-     * Get a redirect response to the default locale.
+     * Returns a RedirectResponse to the default locale homepage.
      *
-     * @return RedirectResponse
+     * @return RedirectResponse Redirect response pointing to the homepage in default locale
      */
     public function getRedirectToDefaultLocale(): RedirectResponse
     {
@@ -41,9 +43,9 @@ class DefaultService implements DefaultServiceInterface
     }
 
     /**
-     * Get data for the homepage template.
+     * Provides data for the homepage template.
      *
-     * @return array<string, mixed>
+     * @return array<string, mixed> Array containing data for rendering the homepage
      */
     public function getHomepageData(): array
     {

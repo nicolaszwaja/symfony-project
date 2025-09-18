@@ -14,21 +14,24 @@ namespace App\Service;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Interface for default application service.
+ * Interface for the default application service.
+ *
+ * Provides methods for redirecting to the default locale and for retrieving
+ * data needed to render the homepage template.
  */
 interface DefaultServiceInterface
 {
     /**
-     * Get a redirect response to the default locale.
+     * Returns a RedirectResponse to the default locale homepage.
      *
-     * @return RedirectResponse
+     * @return RedirectResponse Redirect response pointing to the homepage in default locale
      */
     public function getRedirectToDefaultLocale(): RedirectResponse;
 
     /**
-     * Get data for the homepage template.
+     * Provides data to be used in the homepage template.
      *
-     * @return array<string, mixed>
+     * @return array<string, mixed> Array containing key-value pairs for rendering the homepage
      */
     public function getHomepageData(): array;
 }

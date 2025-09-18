@@ -17,25 +17,27 @@ use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Service for managing comments on posts.
+ * Service responsible for managing comments on posts.
+ *
+ * Provides methods to retrieve posts, add new comments, and delete existing comments.
  */
 class CommentService implements CommentServiceInterface
 {
     /**
      * CommentService constructor.
      *
-     * @param PostRepository $postRepository
+     * @param PostRepository $postRepository Repository for accessing Post entities
      */
     public function __construct(private readonly PostRepository $postRepository)
     {
     }
 
     /**
-     * Retrieve a post by its ID.
+     * Retrieves a post by its ID.
      *
-     * @param int $id The ID of the post
+     * @param int $id The ID of the post to retrieve
      *
-     * @return Post|null
+     * @return Post|null The Post entity if found, or null if not found
      */
     public function getPostById(int $id): ?Post
     {
@@ -43,10 +45,10 @@ class CommentService implements CommentServiceInterface
     }
 
     /**
-     * Add a comment to a post.
+     * Persists a new comment for a post.
      *
-     * @param Comment                $comment The comment to add
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment The Comment entity to add
+     * @param EntityManagerInterface $em      The entity manager used for persistence
      */
     public function addComment(Comment $comment, EntityManagerInterface $em): void
     {
@@ -55,10 +57,10 @@ class CommentService implements CommentServiceInterface
     }
 
     /**
-     * Delete a comment.
+     * Removes a comment from the database.
      *
-     * @param Comment                $comment The comment to delete
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment The Comment entity to remove
+     * @param EntityManagerInterface $em      The entity manager used for deletion
      */
     public function deleteComment(Comment $comment, EntityManagerInterface $em): void
     {

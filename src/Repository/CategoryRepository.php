@@ -25,7 +25,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * CategoryRepository constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry The manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,7 +33,10 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Category[] Returns an array of Category objects
+    //  * Finds categories by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search for
+    //  * @return Category[] Returns an array of Category objects matching the criteria
     //  */
     // public function findByExampleField($value): array
     // {
@@ -46,6 +49,12 @@ class CategoryRepository extends ServiceEntityRepository
     //         ->getResult();
     // }
 
+    // /**
+    //  * Finds a single category by a specific field value.
+    //  *
+    //  * @param mixed $value The value to search by
+    //  * @return Category|null Returns a single Category object or null if none found
+    //  */
     // public function findOneBySomeField($value): ?Category
     // {
     //     return $this->createQueryBuilder('c')

@@ -29,10 +29,8 @@ class AdminController extends AbstractController
      * @param AdminServiceInterface $adminService The admin service used to fetch admin data
      * @param PaginatorInterface    $paginator    The paginator service to paginate results
      */
-    public function __construct(
-        private readonly AdminServiceInterface $adminService,
-        private readonly PaginatorInterface $paginator,
-    ) {
+    public function __construct(private readonly AdminServiceInterface $adminService, private readonly PaginatorInterface $paginator)
+    {
     }
 
     /**

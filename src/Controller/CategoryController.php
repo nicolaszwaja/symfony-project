@@ -23,16 +23,16 @@ class CategoryController extends AbstractController
     /**
      * CategoryController constructor.
      *
-     * @param CategoryServiceInterface $categoryService
+     * @param CategoryServiceInterface $categoryService The service handling category business logic
      */
     public function __construct(private readonly CategoryServiceInterface $categoryService)
     {
     }
 
     /**
-     * Displays a list of all categories.
+     * Displays a list of all categories available in the application.
      *
-     * @return Response
+     * @return Response The rendered category list page
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories', name: 'category_index')]
     public function index(): Response
@@ -45,11 +45,11 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * Displays posts for a given category.
+     * Displays all posts that belong to the given category ID.
      *
-     * @param int $id The category ID
+     * @param int $id The unique identifier of the category
      *
-     * @return Response
+     * @return Response The rendered view with posts for the given category
      */
     #[\Symfony\Component\Routing\Attribute\Route('/categories/{id}/posts', name: 'category_posts')]
     public function posts(int $id): Response

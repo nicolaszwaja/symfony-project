@@ -29,7 +29,7 @@ class PostController extends AbstractController
     /**
      * PostController constructor.
      *
-     * @param PostServiceInterface $postService
+     * @param PostServiceInterface $postService Service for managing post operations
      */
     public function __construct(private readonly PostServiceInterface $postService)
     {
@@ -38,9 +38,9 @@ class PostController extends AbstractController
     /**
      * Displays a paginated list of posts.
      *
-     * @param Request $request The HTTP request
+     * @param Request $request The HTTP request containing query parameters like page or category
      *
-     * @return Response
+     * @return Response The rendered view with paginated posts
      */
     #[\Symfony\Component\Routing\Attribute\Route('/posts', name: 'post_list')]
     public function list(Request $request): Response
@@ -59,13 +59,13 @@ class PostController extends AbstractController
     /**
      * Shows a single post with its comments and allows adding a new comment.
      *
-     * @param int                    $id      The post ID
-     * @param Request                $request The HTTP request
-     * @param EntityManagerInterface $em      The entity manager
+     * @param int                    $id      The unique identifier of the post
+     * @param Request                $request The HTTP request containing submitted comment data
+     * @param EntityManagerInterface $em      The entity manager used to persist the comment
      *
-     * @return Response
+     * @return Response The rendered post view with comments and form
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException When post is not found
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException When the post cannot be found
      */
     #[\Symfony\Component\Routing\Attribute\Route('/posts/{id}', name: 'post_show')]
     public function show(int $id, Request $request, EntityManagerInterface $em): Response
@@ -98,10 +98,10 @@ class PostController extends AbstractController
     /**
      * Creates a new post.
      *
-     * @param Request                $request The HTTP request
-     * @param EntityManagerInterface $em      The entity manager
+     * @param Request                $request The HTTP request containing submitted post data
+     * @param EntityManagerInterface $em      The entity manager used to persist the new post
      *
-     * @return Response
+     * @return Response Redirects on success or re-renders the form on failure
      */
     #[\Symfony\Component\Routing\Attribute\Route('/new', name: 'post_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
@@ -130,11 +130,11 @@ class PostController extends AbstractController
     /**
      * Edits an existing post.
      *
-     * @param Post                   $post    The post entity
-     * @param Request                $request The HTTP request
-     * @param EntityManagerInterface $em      The entity manager
+     * @param Post                   $post    The post entity being edited
+     * @param Request                $request The HTTP request with updated post data
+     * @param EntityManagerInterface $em      The entity manager used to save changes
      *
-     * @return Response
+     * @return Response Redirects on success or re-renders the form if validation fails
      */
     #[\Symfony\Component\Routing\Attribute\Route('/{id}/edit', name: 'post_edit')]
     public function edit(Post $post, Request $request, EntityManagerInterface $em): Response
@@ -161,10 +161,10 @@ class PostController extends AbstractController
     /**
      * Deletes a post.
      *
-     * @param Post                   $post The post entity
-     * @param EntityManagerInterface $em   The entity manager
+     * @param Post                   $post The post entity to delete
+     * @param EntityManagerInterface $em   The entity manager responsible for removal
      *
-     * @return Response
+     * @return Response Redirects after deletion
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/posts/{id}/delete', name: 'post_delete', methods: ['POST'])]
     public function delete(Post $post, EntityManagerInterface $em): Response
@@ -178,11 +178,11 @@ class PostController extends AbstractController
     /**
      * Changes the category of a post.
      *
-     * @param Request                $request The HTTP request
-     * @param Post                   $post    The post entity
-     * @param EntityManagerInterface $em      The entity manager
+     * @param Request                $request The HTTP request containing the new category ID
+     * @param Post                   $post    The post entity whose category should be changed
+     * @param EntityManagerInterface $em      The entity manager responsible for updating the entity
      *
-     * @return Response
+     * @return Response Redirects back to the admin dashboard
      */
     #[\Symfony\Component\Routing\Attribute\Route('/admin/post/{id}/change-category', name: 'post_change_category', methods: ['POST'])]
     public function changeCategory(Request $request, Post $post, EntityManagerInterface $em): Response

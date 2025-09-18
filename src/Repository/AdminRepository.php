@@ -28,7 +28,9 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     /**
      * AdminRepository constructor.
      *
-     * @param ManagerRegistry $registry
+     * Initializes the repository for the Admin entity using the given manager registry.
+     *
+     * @param ManagerRegistry $registry The manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -36,12 +38,14 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Upgrades (rehashes) the user's password automatically over time.
      *
      * @param PasswordAuthenticatedUserInterface $user              The user whose password will be upgraded
-     * @param string                             $newHashedPassword The new hashed password
+     * @param string                             $newHashedPassword The new hashed password to store
      *
-     * @throws UnsupportedUserException
+     * @return void
+     *
+     * @throws UnsupportedUserException When the provided user is not an Admin instance
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -53,27 +57,4 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
-
-    // /**
-    //  * @return Admin[] Returns an array of Admin objects
-    //  */
-    // public function findByExampleField($value): array
-    // {
-    //     return $this->createQueryBuilder('a')
-    //         ->andWhere('a.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->orderBy('a.id', 'ASC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
-    // public function findOneBySomeField($value): ?Admin
-    // {
-    //     return $this->createQueryBuilder('a')
-    //         ->andWhere('a.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->getQuery()
-    //         ->getOneOrNullResult();
-    // }
 }
