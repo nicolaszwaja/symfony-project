@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -22,8 +23,6 @@ class SecurityServiceTest extends TestCase
 {
     /**
      * Test that getLoginData() returns an array with last username and error.
-     *
-     * @return void
      */
     public function testGetLoginDataReturnsCorrectArray(): void
     {

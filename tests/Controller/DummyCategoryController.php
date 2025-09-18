@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -10,99 +11,60 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\Category;
-use App\Form\CategoryType;
-use App\Service\CategoryServiceInterface;
+use App\Entity\Comment;
+use App\Service\CommentServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Dummy controller for testing CategoryController functionality.
+ * DummyCommentController to simulate CommentController behavior for unit tests.
  */
-class DummyCategoryController
+class DummyCommentController
 {
     /**
-     * DummyCategoryController constructor.
+     * DummyCommentController constructor.
      *
-     * @param CategoryServiceInterface $service
+     * @param CommentServiceInterface $service Service used to manage comments
      */
-    public function __construct(private CategoryServiceInterface $service)
+    public function __construct(private CommentServiceInterface $service)
     {
     }
 
     /**
-     * Returns a response for the list of categories.
+     * Handles adding a comment to a post.
      *
-     * @param mixed $repo
+     * @param Request                $request HTTP request with form data
+     * @param int                    $postId  ID of the post
+     * @param EntityManagerInterface $em      Entity manager for persistence
      *
-     * @return Response
+     * @return Response Redirects or renders form view
      */
-    public function list($repo): Response
-    {
-        return new Response('list.html.twig with categories');
-    }
-
-    /**
-     * Handles new category creation.
-     *
-     * @param Request                $request
-     * @param EntityManagerInterface $em
-     *
-     * @return Response
-     */
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
         if (0 < $request->request->count()) {
-            $em->persist(new Category());
+            $comment = new Comment();
+            $em->persist($comment);
             $em->flush();
 
-            return new Response('redirect to categories list');
+            return new Response('redirect to post_show with id '.$postId);
         }
 
-        return new Response('new.html.twig form');
+        return new Response('render post/show.html.twig with form');
     }
 
     /**
-     * Handles editing an existing category.
+     * Handles deleting a comment.
      *
-     * @param Category               $category
-     * @param Request                $request
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment Comment to delete
+     * @param EntityManagerInterface $em      Entity manager to remove comment
      *
-     * @return Response
+     * @return Response Redirects to admin dashboard
      */
-    public function edit(Category $category, Request $request, EntityManagerInterface $em): Response
+    public function delete(Comment $comment, EntityManagerInterface $em): Response
     {
-        if (0 < $request->request->count()) {
-            $em->flush();
+        $this->service->deleteComment($comment, $em);
 
-            return new Response('redirect to dashboard');
-        }
-
-        return new Response('edit.html.twig form');
-    }
-
-    /**
-     * Handles deletion of a category.
-     *
-     * @param Request                $request
-     * @param Category               $category
-     * @param EntityManagerInterface $em
-     *
-     * @return Response
-     */
-    public function delete(Request $request, Category $category, EntityManagerInterface $em): Response
-    {
-        $token = $request->request->get('_token');
-
-        if ('delete'.$category->getId() === $token) {
-            $em->remove($category);
-            $em->flush();
-
-            return new Response('redirect after delete');
-        }
-
-        return new Response('redirect after invalid token');
+        return new Response('redirect to admin_dashboard');
     }
 }

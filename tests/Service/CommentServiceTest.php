@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -24,8 +25,6 @@ class CommentServiceTest extends TestCase
 {
     /**
      * Test that getPostById() returns the correct Post entity.
-     *
-     * @return void
      */
     public function testGetPostByIdReturnsPost(): void
     {
@@ -42,8 +41,6 @@ class CommentServiceTest extends TestCase
 
     /**
      * Test that addComment() persists and flushes the comment.
-     *
-     * @return void
      */
     public function testAddCommentPersistsAndFlushes(): void
     {
@@ -59,8 +56,6 @@ class CommentServiceTest extends TestCase
 
     /**
      * Test that deleteComment() removes and flushes the comment.
-     *
-     * @return void
      */
     public function testDeleteCommentRemovesAndFlushes(): void
     {

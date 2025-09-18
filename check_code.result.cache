@@ -1,24 +1,54 @@
    1) src/Repository/AdminRepository.php (no_superfluous_phpdoc_tags, phpdoc_separation)
 
-Found 1 of 35 files that can be fixed in 0.596 seconds, 18.00 MB memory used
-   1) tests/Controller/CategoryControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   2) tests/Controller/CommentControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   3) tests/Controller/DummyAdminController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
-   4) tests/Controller/DummyCategoryController.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim, no_unused_imports)
-   5) tests/Controller/DummyCommentController.php (single_quote, no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   6) tests/Controller/DummyPostController.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   7) tests/Controller/PostControllerTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   8) tests/Entity/AdminTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-   9) tests/Entity/CategoryTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-  10) tests/Entity/CommentTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-  11) tests/Entity/PostTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-  12) tests/Form/PostTypeTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-  13) tests/Service/CategoryServiceTest.php (class_attributes_separation, class_definition, fully_qualified_strict_types, no_superfluous_phpdoc_tags, blank_line_after_opening_tag, statement_indentation, phpdoc_trim, no_unused_imports)
-  14) tests/Service/CommentServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
-  15) tests/Service/PostServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim, no_unused_imports)
-  16) tests/Service/SecurityServiceTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+Found 1 of 35 files that can be fixed in 0.577 seconds, 18.00 MB memory used
+   1) tests/Controller/DummyCommentController.php (single_quote, no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) tests/Controller/DummyPostController.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   3) tests/Controller/PostControllerTest.php (phpdoc_summary)
+   4) tests/Entity/AdminTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   5) tests/Entity/CategoryTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   6) tests/Entity/CommentTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   7) tests/Entity/PostTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   8) tests/Form/PostTypeTest.php (no_superfluous_phpdoc_tags, blank_line_after_opening_tag, phpdoc_trim)
+   9) tests/Service/CategoryServiceTest.php (class_definition, fully_qualified_strict_types)
 
-Found 16 of 18 files that can be fixed in 0.349 seconds, 18.00 MB memory used
+Found 9 of 20 files that can be fixed in 0.274 seconds, 18.00 MB memory used
+
+FILE: /workspace/symfony-project/tests/Controller/SecurityControllerTest.php
+---------------------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+---------------------------------------------------------------------------------
+ 25 | ERROR | Missing doc comment for function testControllerCanBeInstantiated()
+---------------------------------------------------------------------------------
+
+
+FILE: /workspace/symfony-project/tests/Controller/AdminControllerTest.php
+---------------------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+---------------------------------------------------------------------------------
+ 26 | ERROR | Missing doc comment for function testControllerCanBeInstantiated()
+---------------------------------------------------------------------------------
+
+
+FILE: /workspace/symfony-project/tests/Controller/Admin/CategoryControllerTest.php
+----------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 3 LINES
+----------------------------------------------------------------------------------
+ 16 | ERROR | Missing doc comment for class CategoryControllerTest
+ 18 | ERROR | Missing doc comment for function testListRouteReturnsResponse()
+ 37 | ERROR | Missing doc comment for function testNewRouteReturnsResponse()
+----------------------------------------------------------------------------------
+
+
+FILE: /workspace/symfony-project/tests/Service/CategoryServiceTest.php
+----------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 51 | ERROR | Missing @return tag in function comment
+ 57 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+Time: 437ms; Memory: 8MB
+
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -28,9 +58,9 @@ Found 16 of 18 files that can be fixed in 0.349 seconds, 18.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250825162145
-[notice] finished in 5.2ms, used 14M memory, 1 migrations executed, 6 sql queries
+[notice] finished in 7ms, used 14M memory, 1 migrations executed, 6 sql queries
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20250825162145                                        
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250825162145                              
 
 
    > purging database

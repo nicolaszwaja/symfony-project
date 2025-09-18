@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -14,7 +17,6 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Service\CategoryService;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Unit tests for the CategoryService.
@@ -23,8 +25,6 @@ class CategoryServiceTest extends TestCase
 {
     /**
      * Test that getAllCategories() returns an array of categories.
-     *
-     * @return void
      */
     public function testGetAllCategoriesReturnsArray(): void
     {
@@ -48,16 +48,12 @@ class CategoryServiceTest extends TestCase
 
     /**
      * Test that getPostsByCategoryId() returns the category and its posts.
-     *
-     * @return void
      */
     public function testGetPostsByCategoryIdReturnsCategoryAndPosts(): void
     {
-        $category = new class() extends \App\Entity\Category { // nawiasy dodane
+        $category = new class() extends \App\Entity\Category {
             /**
              * Simulate getPosts() returning an array of posts.
-             *
-             * @return array
              */
             public function getPosts(): array
             {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -18,7 +19,6 @@ use App\Service\PostService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Unit tests for the PostService.
@@ -27,8 +27,6 @@ class PostServiceTest extends TestCase
 {
     /**
      * Test that getPostById() returns the correct Post entity.
-     *
-     * @return void
      */
     public function testGetPostByIdReturnsPost(): void
     {
@@ -49,8 +47,6 @@ class PostServiceTest extends TestCase
 
     /**
      * Test that savePost() persists and flushes the Post entity.
-     *
-     * @return void
      */
     public function testSavePostPersistsAndFlushes(): void
     {
@@ -72,8 +68,6 @@ class PostServiceTest extends TestCase
 
     /**
      * Test that deletePost() removes and flushes the Post entity.
-     *
-     * @return void
      */
     public function testDeletePostRemovesAndFlushes(): void
     {
@@ -95,8 +89,6 @@ class PostServiceTest extends TestCase
 
     /**
      * Test that changeCategory() with a valid category sets the category on the post.
-     *
-     * @return void
      */
     public function testChangeCategoryWithValidCategorySetsCategory(): void
     {
@@ -125,8 +117,6 @@ class PostServiceTest extends TestCase
 
     /**
      * Test that getCategories() returns all categories as an array.
-     *
-     * @return void
      */
     public function testGetCategoriesReturnsArray(): void
     {
