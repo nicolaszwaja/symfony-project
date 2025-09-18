@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -23,6 +25,11 @@ use App\Service\AdminServiceInterface;
  */
 class AdminControllerTest extends TestCase
 {
+    /**
+     * Test that the AdminController can be instantiated with mock services.
+     *
+     * Sprawdza tylko poprawną inicjalizację kontrolera.
+     */
     public function testControllerCanBeInstantiated(): void
     {
         $adminService = $this->createMock(AdminServiceInterface::class);

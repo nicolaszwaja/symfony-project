@@ -25,7 +25,7 @@ class DummyPostController
     /**
      * Constructor with injected post service.
      *
-     * @param PostServiceInterface $postService
+     * @param PostServiceInterface $postService The post service
      */
     public function __construct(private readonly PostServiceInterface $postService)
     {
@@ -34,10 +34,10 @@ class DummyPostController
     /**
      * Simulates deleting a post and returning a redirect response.
      *
-     * @param Post                   $post
-     * @param EntityManagerInterface $em
+     * @param Post                   $post The post to delete
+     * @param EntityManagerInterface $em   The entity manager
      *
-     * @return Response
+     * @return Response Returns a redirect Response
      */
     public function delete(Post $post, EntityManagerInterface $em): Response
     {
@@ -49,11 +49,11 @@ class DummyPostController
     /**
      * Simulates changing a post category and returning a redirect response.
      *
-     * @param Request                $request
-     * @param Post                   $post
-     * @param EntityManagerInterface $em
+     * @param Request                $request The HTTP request object
+     * @param Post                   $post    The post to update
+     * @param EntityManagerInterface $em      The entity manager
      *
-     * @return Response
+     * @return Response Returns a redirect Response
      */
     public function changeCategory(Request $request, Post $post, EntityManagerInterface $em): Response
     {

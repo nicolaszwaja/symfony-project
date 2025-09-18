@@ -24,7 +24,9 @@ use PHPUnit\Framework\TestCase;
 class CategoryServiceTest extends TestCase
 {
     /**
-     * Test that getAllCategories() returns an array of categories.
+     * Test that getAllCategories() returns an array of Category entities.
+     *
+     * @return void Ensures that the service returns all categories as an array
      */
     public function testGetAllCategoriesReturnsArray(): void
     {
@@ -48,12 +50,17 @@ class CategoryServiceTest extends TestCase
 
     /**
      * Test that getPostsByCategoryId() returns the category and its posts.
+     *
+     * @return void Ensures that the service correctly fetches a category and its related posts
      */
     public function testGetPostsByCategoryIdReturnsCategoryAndPosts(): void
     {
-        $category = new class() extends \App\Entity\Category {
+        $category = new class() extends Category
+        {
             /**
              * Simulate getPosts() returning an array of posts.
+             *
+             * @return array Returns a sample array of posts for testing purposes
              */
             public function getPosts(): array
             {

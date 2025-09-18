@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -21,7 +22,7 @@ class AdminTest extends TestCase
     /**
      * Tests all getters and setters of the Admin entity.
      *
-     * @return void
+     * @return void Ensures that username, roles, password, ID, and eraseCredentials() behave as expected
      */
     public function testGettersAndSetters(): void
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -21,7 +22,7 @@ class CategoryTest extends TestCase
     /**
      * Tests getters and setters of the Category entity.
      *
-     * @return void
+     * @return void Ensures that the ID is initially null and the name property can be set and retrieved correctly
      */
     public function testGettersAndSetters(): void
     {

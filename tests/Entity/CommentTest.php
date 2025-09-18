@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -22,7 +23,8 @@ class CommentTest extends TestCase
     /**
      * Tests getters and setters of the Comment entity.
      *
-     * @return void
+     * @return void Ensures that all properties (id, post, nickname, email, content, createdAt)
+     *              can be set and retrieved correctly
      */
     public function testGettersAndSetters(): void
     {

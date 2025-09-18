@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Response;
 class DummyCommentController
 {
     /**
-     * DummyCommentController constructor.
+     * Constructor.
      *
-     * @param CommentServiceInterface $service
+     * @param CommentServiceInterface $service The comment service
      */
     public function __construct(private CommentServiceInterface $service)
     {
@@ -34,11 +34,11 @@ class DummyCommentController
     /**
      * Handles adding a comment to a post.
      *
-     * @param Request                $request
-     * @param int                    $postId
-     * @param EntityManagerInterface $em
+     * @param Request                $request The HTTP request object
+     * @param int                    $postId  The ID of the post
+     * @param EntityManagerInterface $em      The entity manager
      *
-     * @return Response
+     * @return Response Returns a Response simulating redirection or form rendering
      */
     public function add(Request $request, int $postId, EntityManagerInterface $em): Response
     {
@@ -47,19 +47,19 @@ class DummyCommentController
             $em->persist($comment);
             $em->flush();
 
-            return new Response("redirect to post_show with id $postId");
+            return new Response('redirect to post_show with id '.$postId);
         }
 
-        return new Response("render post/show.html.twig with form");
+        return new Response('render post/show.html.twig with form');
     }
 
     /**
      * Handles deleting a comment.
      *
-     * @param Comment                $comment
-     * @param EntityManagerInterface $em
+     * @param Comment                $comment The comment to delete
+     * @param EntityManagerInterface $em      The entity manager
      *
-     * @return Response
+     * @return Response Returns a Response simulating redirection
      */
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {

@@ -26,11 +26,9 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 class AdminRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     /**
-     * AdminRepository constructor.
-     *
      * Initializes the repository for the Admin entity using the given manager registry.
      *
-     * @param ManagerRegistry $registry The manager registry for Doctrine
+     * @param ManagerRegistry $registry The manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -43,8 +41,6 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
      * @param PasswordAuthenticatedUserInterface $user              The user whose password will be upgraded
      * @param string                             $newHashedPassword The new hashed password to store
      *
-     * @return void
-     *
      * @throws UnsupportedUserException When the provided user is not an Admin instance
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
@@ -54,6 +50,7 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
         }
 
         $user->setPassword($newHashedPassword);
+
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }

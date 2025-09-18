@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -21,7 +22,7 @@ class PostTypeTest extends FormIntegrationTestCase
     /**
      * Test that PostType class can be instantiated.
      *
-     * @return void
+     * @return void Ensures that the form type object is correctly created
      */
     public function testPostTypeClass(): void
     {
@@ -32,7 +33,7 @@ class PostTypeTest extends FormIntegrationTestCase
     /**
      * Test that the form type class name is correct.
      *
-     * @return void
+     * @return void Ensures that the fully qualified class name matches expectations
      */
     public function testFormTypeName(): void
     {

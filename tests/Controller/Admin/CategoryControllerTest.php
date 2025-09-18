@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -13,8 +15,16 @@ namespace App\Tests\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Integration tests for the CategoryController in the admin panel.
+ *
+ * Sprawdzają, czy trasy listy i tworzenia nowych kategorii zwracają odpowiedź.
+ */
 class CategoryControllerTest extends WebTestCase
 {
+    /**
+     * Test that the list route (/admin/categories/) returns a successful HTTP response or redirect.
+     */
     public function testListRouteReturnsResponse(): void
     {
         $client = static::createClient();
@@ -34,6 +44,9 @@ class CategoryControllerTest extends WebTestCase
         $this->assertStringContainsString('html', $response->headers->get('Content-Type'));
     }
 
+    /**
+     * Test that the new route (/admin/categories/new) returns a successful HTTP response or redirect.
+     */
     public function testNewRouteReturnsResponse(): void
     {
         $client = static::createClient();

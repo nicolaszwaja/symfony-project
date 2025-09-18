@@ -14,7 +14,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class PostControllerTest
+ * Class PostControllerTest.
  *
  * Testuje dostępność strony listy postów i poprawność zwracanego HTML.
  */

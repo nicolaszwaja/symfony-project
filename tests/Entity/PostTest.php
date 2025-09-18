@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Symfony Project.
  *
@@ -23,7 +24,8 @@ class PostTest extends TestCase
     /**
      * Tests getters and setters of the Post entity.
      *
-     * @return void
+     * @return void Ensures that all properties (id, category, title, content, createdAt, comments)
+     *              can be set, retrieved, and updated correctly
      */
     public function testGettersAndSetters(): void
     {
